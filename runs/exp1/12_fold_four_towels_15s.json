@@ -1,0 +1,202 @@
+{
+ "episode": {
+  "episode_id": "12_fold_four_towels_15s",
+  "robot": null,
+  "outcome": null
+ },
+ "steps": [
+  {
+   "step_n": 1,
+   "step_name": "Move a towel to the working area",
+   "t_start": 0.0,
+   "t_end": 0.0,
+   "f_start": 0,
+   "f_end": 0
+  },
+  {
+   "step_n": 2,
+   "step_name": "Straighten the towel",
+   "t_start": 0.0,
+   "t_end": 0.0,
+   "f_start": 0,
+   "f_end": 0
+  },
+  {
+   "step_n": 3,
+   "step_name": "First fold (lengthwise in half)",
+   "t_start": 0.0,
+   "t_end": 0.0,
+   "f_start": 0,
+   "f_end": 0
+  },
+  {
+   "step_n": 4,
+   "step_name": "Second fold (widthwise in half)",
+   "t_start": 0.0,
+   "t_end": 0.0,
+   "f_start": 0,
+   "f_end": 0
+  },
+  {
+   "step_n": 5,
+   "step_name": "Stack the folded towel onto the pile",
+   "t_start": 0.0,
+   "t_end": 0.0,
+   "f_start": 0,
+   "f_end": 0
+  },
+  {
+   "step_n": 6,
+   "step_name": "Move the folded towel or stack to the right side of the table",
+   "t_start": 0.0,
+   "t_end": 0.0,
+   "f_start": 0,
+   "f_end": 0
+  },
+  {
+   "step_n": 7,
+   "step_name": "Return to home and end the episode",
+   "t_start": 0.0,
+   "t_end": 0.0,
+   "f_start": 0,
+   "f_end": 0
+  }
+ ],
+ "subtasks": [
+  {
+   "seq": 1,
+   "step_n": 1,
+   "name": "Move one towel from the left pile to the working area",
+   "occurrence": 1,
+   "object": "towel",
+   "object_detail": null,
+   "t_start": 0.0,
+   "t_end": 0.0,
+   "f_start": 0,
+   "f_end": 0,
+   "status": "ok",
+   "recovery_t": null,
+   "note": null
+  },
+  {
+   "seq": 2,
+   "step_n": 2,
+   "name": "Straighten the towel flat, cross hems at the top and bottom",
+   "occurrence": 1,
+   "object": "towel",
+   "object_detail": null,
+   "t_start": 0.0,
+   "t_end": 0.0,
+   "f_start": 0,
+   "f_end": 0,
+   "status": "ok",
+   "recovery_t": null,
+   "note": null
+  },
+  {
+   "seq": 3,
+   "step_n": 3,
+   "name": "Fold the towel lengthwise in half, long edge to long edge",
+   "occurrence": 1,
+   "object": "towel",
+   "object_detail": null,
+   "t_start": 0.0,
+   "t_end": 0.0,
+   "f_start": 0,
+   "f_end": 0,
+   "status": "ok",
+   "recovery_t": null,
+   "note": null
+  },
+  {
+   "seq": 4,
+   "step_n": 4,
+   "name": "Fold the strip widthwise in half, short edge to short edge",
+   "occurrence": 1,
+   "object": "towel",
+   "object_detail": null,
+   "t_start": 0.0,
+   "t_end": 0.0,
+   "f_start": 0,
+   "f_end": 0,
+   "status": "ok",
+   "recovery_t": null,
+   "note": null
+  },
+  {
+   "seq": 5,
+   "step_n": 5,
+   "name": "Pull the folded towel aside to clear space",
+   "occurrence": 1,
+   "object": "towel",
+   "object_detail": null,
+   "t_start": 0.0,
+   "t_end": 0.0,
+   "f_start": 0,
+   "f_end": 0,
+   "status": "ok",
+   "recovery_t": null,
+   "note": "count: 0–1, only if a pile is already at the back-right"
+  },
+  {
+   "seq": 6,
+   "step_n": 5,
+   "name": "Drag the pile next to the folded towel",
+   "occurrence": 1,
+   "object": "pile",
+   "object_detail": null,
+   "t_start": 0.0,
+   "t_end": 0.0,
+   "f_start": 0,
+   "f_end": 0,
+   "status": "ok",
+   "recovery_t": null,
+   "note": "count: 0–1, only if a pile is already at the back-right"
+  },
+  {
+   "seq": 7,
+   "step_n": 5,
+   "name": "Lift the folded towel onto the pile",
+   "occurrence": 1,
+   "object": "towel",
+   "object_detail": null,
+   "t_start": 0.0,
+   "t_end": 0.0,
+   "f_start": 0,
+   "f_end": 0,
+   "status": "ok",
+   "recovery_t": null,
+   "note": "count: 0–1, only if a pile is already at the back-right"
+  },
+  {
+   "seq": 8,
+   "step_n": 6,
+   "name": "Drag the folded towel or pile to the back-right pile location",
+   "occurrence": 1,
+   "object": "pile",
+   "object_detail": null,
+   "t_start": 0.0,
+   "t_end": 0.0,
+   "f_start": 0,
+   "f_end": 0,
+   "status": "ok",
+   "recovery_t": null,
+   "note": null
+  },
+  {
+   "seq": 9,
+   "step_n": 7,
+   "name": "Confirm the end state, return both arms home, and end the episode",
+   "occurrence": 1,
+   "object": "–",
+   "object_detail": null,
+   "t_start": 0.0,
+   "t_end": 0.0,
+   "f_start": 0,
+   "f_end": 0,
+   "status": "ok",
+   "recovery_t": null,
+   "note": null
+  }
+ ]
+}

@@ -1,0 +1,125 @@
+{
+    "video": "/users/rzhou52/data/users/rzhou52/video-annotation/data/12_fold_four_towels_15s.mp4",
+    "fps": 50.0,
+    "decoded_frames": 750,
+    "task": "fold_four_towels",
+    "model": "/users/rzhou52/data/users/rzhou52/Qwen3-VL-8B-Instruct",
+    "args": {
+        "video": "/users/rzhou52/data/users/rzhou52/video-annotation/data/12_fold_four_towels_15s.mp4",
+        "task_sheet": "/users/rzhou52/data/users/rzhou52/video-annotation/data/task_sheet.json",
+        "task": "fold_four_towels",
+        "model": "/users/rzhou52/data/users/rzhou52/Qwen3-VL-8B-Instruct",
+        "out": "runs/exp1",
+        "sample_fps": 2.0,
+        "window_sec": 8.0,
+        "stride_sec": 6.0,
+        "image_width": 640,
+        "max_new_tokens": 2048,
+        "dry_run": false
+    },
+    "windows": [
+        {
+            "window": 0,
+            "frames": [
+                0,
+                25,
+                50,
+                75,
+                100,
+                125,
+                150,
+                175,
+                200,
+                225,
+                250,
+                275,
+                300,
+                325,
+                350,
+                375
+            ],
+            "times": [
+                0.0,
+                0.5,
+                1.0,
+                1.5,
+                2.0,
+                2.5,
+                3.0,
+                3.5,
+                4.0,
+                4.5,
+                5.0,
+                5.5,
+                6.0,
+                6.5,
+                7.0,
+                7.5
+            ],
+            "gen_sec": 74.2,
+            "raw_output": "PART 1 - OBSERVATIONS:\nframe 0 (t=0.000s): left gripper: not visible; right gripper: not visible; towel and other objects: a light-colored towel is folded and lying on the right side of the table; a pile of towels (red, beige, light blue) is on the left side of the table.\nframe 25 (t=0.500s): left gripper: not visible; right gripper: not visible; towel and other objects: same as frame 0.\nframe 50 (t=1.000s): left gripper: not visible; right gripper: not visible; towel and other objects: same as frame 0.\nframe 75 (t=1.500s): left gripper: not visible; right gripper: not visible; towel and other objects: same as frame 0.\nframe 100 (t=2.000s): left gripper: holding a light blue towel; right gripper: not visible; towel and other objects: the light blue towel is being lifted from the pile on the left; the folded towel remains on the right.\nframe 125 (t=2.500s): left gripper: not visible; right gripper: holding a light blue towel; towel and other objects: the light blue towel is being held by the right gripper; the left gripper is empty.\nframe 150 (t=3.000s): left gripper: not visible; right gripper: holding a light blue towel; towel and other objects: the light blue towel is being held by the right gripper; the left gripper is empty.\nframe 175 (t=3.500s): left gripper: not visible; right gripper: holding a light blue towel; towel and other objects: the light blue towel is being held by the right gripper; the left gripper is empty.\nframe 200 (t=4.000s): left gripper: not visible; right gripper: holding a light blue towel; towel and other objects: the light blue towel is being held by the right gripper; the left gripper is empty.\nframe 225 (t=4.500s): left gripper: not visible; right gripper: holding a light blue towel; towel and other objects: the light blue towel is being held by the right gripper; the left gripper is empty.\nframe 250 (t=5.000s): left gripper: not visible; right gripper: holding a light blue towel; towel and other objects: the light blue towel is being held by the right gripper; the left gripper is empty.\nframe 275 (t=5.500s): left gripper: not visible; right gripper: holding a light blue towel; towel and other objects: the light blue towel is being held by the right gripper; the left gripper is empty.\nframe 300 (t=6.000s): left gripper: not visible; right gripper: holding a light blue towel; towel and other objects: the light blue towel is being held by the right gripper; the left gripper is empty.\nframe 325 (t=6.500s): left gripper: not visible; right gripper: holding a light blue towel; towel and other objects: the light blue towel is being held by the right gripper; the left gripper is empty.\nframe 350 (t=7.000s): left gripper: not visible; right gripper: holding a light blue towel; towel and other objects: the light blue towel is being held by the right gripper; the left gripper is empty.\nframe 375 (t=7.500s): left gripper: not visible; right gripper: holding a light blue towel; towel and other objects: the light blue towel is being held by the right gripper; the left gripper is empty.\n\nPART 2 - MATCHING:\n```json\n[\n  {\n    \"start_frame\": 100,\n    \"end_frame\": 150,\n    \"observed_action\": \"Left gripper picks up a towel from the pile on the left side of the table.\",\n    \"subtask\": \"Move one towel from the left pile to the working area\",\n    \"ends_when_seen\": false,\n    \"evidence_frames\": [100, 125, 150],\n    \"uncertain\": null\n  },\n  {\n    \"start_frame\": 150,\n    \"end_frame\": 375,\n    \"observed_action\": \"Right gripper holds the towel and moves it to the center of the table, preparing to straighten it.\",\n    \"subtask\": \"Straighten the towel flat, cross hems at the top and bottom\",\n    \"ends_when_seen\": false,\n    \"evidence_frames\": [150, 175, 200, 225, 250, 275, 300, 325, 350, 375],\n    \"uncertain\": null\n  }\n]\n```"
+        },
+        {
+            "window": 1,
+            "frames": [
+                300,
+                325,
+                350,
+                375,
+                400,
+                425,
+                450,
+                475,
+                500,
+                525,
+                550,
+                575,
+                600,
+                625,
+                650,
+                675
+            ],
+            "times": [
+                6.0,
+                6.5,
+                7.0,
+                7.5,
+                8.0,
+                8.5,
+                9.0,
+                9.5,
+                10.0,
+                10.5,
+                11.0,
+                11.5,
+                12.0,
+                12.5,
+                13.0,
+                13.5
+            ],
+            "gen_sec": 69.2,
+            "raw_output": "PART 1 - OBSERVATIONS\nframe 300 (t=6.000s): left gripper: holding a grey towel; right gripper: not visible; towel and other objects: grey towel held by left gripper, other towels in pile on left, beige towel on right\nframe 325 (t=6.500s): left gripper: holding a grey towel; right gripper: not visible; towel and other objects: grey towel held by left gripper, other towels in pile on left, beige towel on right\nframe 350 (t=7.000s): left gripper: holding a grey towel; right gripper: not visible; towel and other objects: grey towel held by left gripper, other towels in pile on left, beige towel on right\nframe 375 (t=7.500s): left gripper: holding a grey towel; right gripper: not visible; towel and other objects: grey towel held by left gripper, other towels in pile on left, beige towel on right\nframe 400 (t=8.000s): left gripper: holding a grey towel; right gripper: not visible; towel and other objects: grey towel held by left gripper, other towels in pile on left, beige towel on right\nframe 425 (t=8.500s): left gripper: holding a grey towel; right gripper: not visible; towel and other objects: grey towel held by left gripper, other towels in pile on left, beige towel on right\nframe 450 (t=9.000s): left gripper: holding a grey towel; right gripper: not visible; towel and other objects: grey towel held by left gripper, other towels in pile on left, beige towel on right\nframe 475 (t=9.500s): left gripper: holding a grey towel; right gripper: not visible; towel and other objects: grey towel held by left gripper, other towels in pile on left, beige towel on right\nframe 500 (t=10.000s): left gripper: holding a grey towel; right gripper: not visible; towel and other objects: grey towel held by left gripper, other towels in pile on left, beige towel on right\nframe 525 (t=10.500s): left gripper: holding a grey towel; right gripper: not visible; towel and other objects: grey towel held by left gripper, other towels in pile on left, beige towel on right\nframe 550 (t=11.000s): left gripper: holding a grey towel; right gripper: not visible; towel and other objects: grey towel held by left gripper, other towels in pile on left, beige towel on right\nframe 575 (t=11.500s): left gripper: holding a grey towel; right gripper: not visible; towel and other objects: grey towel held by left gripper, other towels in pile on left, beige towel on right\nframe 600 (t=12.000s): left gripper: holding a grey towel; right gripper: not visible; towel and other objects: grey towel held by left gripper, other towels in pile on left, beige towel on right\nframe 625 (t=12.500s): left gripper: holding a grey towel; right gripper: not visible; towel and other objects: grey towel held by left gripper, other towels in pile on left, beige towel on right\nframe 650 (t=13.000s): left gripper: holding a grey towel; right gripper: not visible; towel and other objects: grey towel held by left gripper, other towels in pile on left, beige towel on right\nframe 675 (t=13.500s): left gripper: holding a grey towel; right gripper: not visible; towel and other objects: grey towel held by left gripper, other towels in pile on left, beige towel on right\n\nPART 2 - MATCHING\n```json\n[\n  {\n    \"start_frame\": 300,\n    \"end_frame\": 675,\n    \"observed_action\": \"left gripper holds a grey towel, right gripper not visible, towel remains held throughout the frames\",\n    \"subtask\": \"Move one towel from the left pile to the working area\",\n    \"ends_when_seen\": false,\n    \"evidence_frames\": [300, 325, 350, 375, 400, 425, 450, 475, 500, 525, 550, 575, 600, 625, 650, 675],\n    \"uncertain\": null\n  }\n]\n```"
+        },
+        {
+            "window": 2,
+            "frames": [
+                600,
+                625,
+                650,
+                675,
+                700,
+                725
+            ],
+            "times": [
+                12.0,
+                12.5,
+                13.0,
+                13.5,
+                14.0,
+                14.5
+            ],
+            "gen_sec": 35.7,
+            "raw_output": "PART 1 - OBSERVATIONS:\nframe 600 (t=12.000s): left gripper: holding a green towel; right gripper: not visible; towel and other objects: green towel draped over left gripper, beige towel flat on right side of table\nframe 625 (t=12.500s): left gripper: holding a green towel; right gripper: not visible; towel and other objects: green towel draped over left gripper, beige towel flat on right side of table\nframe 650 (t=13.000s): left gripper: holding a green towel; right gripper: not visible; towel and other objects: green towel draped over left gripper, beige towel flat on right side of table\nframe 675 (t=13.500s): left gripper: holding a green towel; right gripper: not visible; towel and other objects: green towel draped over left gripper, beige towel flat on right side of table\nframe 700 (t=14.000s): left gripper: holding a green towel; right gripper: holding a green towel; towel and other objects: green towel being pulled taut and spread out across the table, beige towel flat on right side\nframe 725 (t=14.500s): left gripper: holding a green towel; right gripper: holding a green towel; towel and other objects: green towel laid flat and spread out across the table, beige towel flat on right side\n\nPART 2 - MATCHING:\n```json\n[\n  {\n    \"start_frame\": 600,\n    \"end_frame\": 675,\n    \"observed_action\": \"left gripper holds a green towel, which is draped over it, while the right gripper is not visible\",\n    \"subtask\": \"Move one towel from the left pile to the working area\",\n    \"ends_when_seen\": false,\n    \"evidence_frames\": [600, 625, 650, 675],\n    \"uncertain\": null\n  },\n  {\n    \"start_frame\": 700,\n    \"end_frame\": 725,\n    \"observed_action\": \"left and right grippers hold the green towel, spreading it flat across the table\",\n    \"subtask\": \"Straighten the towel flat, cross hems at the top and bottom\",\n    \"ends_when_seen\": false,\n    \"evidence_frames\": [700, 725],\n    \"uncertain\": null\n  }\n]\n```"
+        }
+    ]
+}

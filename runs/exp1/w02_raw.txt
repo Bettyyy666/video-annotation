@@ -1,0 +1,31 @@
+PART 1 - OBSERVATIONS:
+frame 600 (t=12.000s): left gripper: holding a green towel; right gripper: not visible; towel and other objects: green towel draped over left gripper, beige towel flat on right side of table
+frame 625 (t=12.500s): left gripper: holding a green towel; right gripper: not visible; towel and other objects: green towel draped over left gripper, beige towel flat on right side of table
+frame 650 (t=13.000s): left gripper: holding a green towel; right gripper: not visible; towel and other objects: green towel draped over left gripper, beige towel flat on right side of table
+frame 675 (t=13.500s): left gripper: holding a green towel; right gripper: not visible; towel and other objects: green towel draped over left gripper, beige towel flat on right side of table
+frame 700 (t=14.000s): left gripper: holding a green towel; right gripper: holding a green towel; towel and other objects: green towel being pulled taut and spread out across the table, beige towel flat on right side
+frame 725 (t=14.500s): left gripper: holding a green towel; right gripper: holding a green towel; towel and other objects: green towel laid flat and spread out across the table, beige towel flat on right side
+
+PART 2 - MATCHING:
+```json
+[
+  {
+    "start_frame": 600,
+    "end_frame": 675,
+    "observed_action": "left gripper holds a green towel, which is draped over it, while the right gripper is not visible",
+    "subtask": "Move one towel from the left pile to the working area",
+    "ends_when_seen": false,
+    "evidence_frames": [600, 625, 650, 675],
+    "uncertain": null
+  },
+  {
+    "start_frame": 700,
+    "end_frame": 725,
+    "observed_action": "left and right grippers hold the green towel, spreading it flat across the table",
+    "subtask": "Straighten the towel flat, cross hems at the top and bottom",
+    "ends_when_seen": false,
+    "evidence_frames": [700, 725],
+    "uncertain": null
+  }
+]
+```
