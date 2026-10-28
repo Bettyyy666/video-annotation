@@ -127,7 +127,7 @@ def build_messages(window, sheet_text, sample_fps):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--video", default=f"{DATA}/12_fold_four_towels_15s.mp4")
+    ap.add_argument("--video", default=f"{DATA}/12_fold_four_towels.mp4")
     ap.add_argument("--task-sheet", default=f"{DATA}/task_sheets.json")
     ap.add_argument("--model", default=MODEL)
     ap.add_argument("--out", default="runs/exp1")
@@ -140,22 +140,23 @@ def main():
     args = ap.parse_args()
 
     out = Path(args.out)
-    (out / "frames").mkdir(parents=True, exist_ok=True)
+    frames_dir = out / Path(args.video).stem
+    frames_dir.mkdir(parents=True, exist_ok=True)
 
     task = load_task(args.task_sheet, args.video)
     sheet_text = json.dumps(task, indent=1, ensure_ascii=False)
     samples, fps, n_frames = sample_frames(args.video, args.sample_fps, args.image_width)
     windows = make_windows(samples, args.window_sec, args.stride_sec)
     print(f"fps={fps} decoded_frames={n_frames} samples={len(samples)} windows={len(windows)}")
-
+    
+    # Save sampled frames so the outputs can be checked against the video.
+    for s in samples:
+        s["image"].save(frames_dir / f"f{s['frame']:06d}_t{s['t']:07.3f}.jpg", quality=90)
+    return 
+    
     # initialize results json
     results = init_results(task, args.video)
     json.dump(results, open(out / f"{Path(args.video).stem}.json", "w"), indent=1, ensure_ascii=False)
-
-    return 
-    # Save sampled frames so the outputs can be checked against the video.
-    for s in samples:
-        s["image"].save(out / "frames" / f"f{s['frame']:06d}_t{s['t']:07.3f}.jpg", quality=90)
 
     if not args.dry_run:
         import torch
