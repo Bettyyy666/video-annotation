@@ -1,0 +1,232 @@
+{
+  "episode": {
+    "episode_id": "26_sort_cutlery_drawer_insert",
+    "robot": null,
+    "outcome": "success"
+  },
+  "steps": [
+    {
+      "step_n": 1,
+      "step_name": "Sort the two dinner spoons",
+      "t_start": 0.0,
+      "t_end": 34.0,
+      "f_start": 0,
+      "f_end": 1700
+    },
+    {
+      "step_n": 2,
+      "step_name": "Sort the two forks",
+      "t_start": 34.0,
+      "t_end": 66.42,
+      "f_start": 1700,
+      "f_end": 3321
+    },
+    {
+      "step_n": 3,
+      "step_name": "Sort the two knives",
+      "t_start": 66.42,
+      "t_end": 75.66,
+      "f_start": 3321,
+      "f_end": 3783
+    },
+    {
+      "step_n": 4,
+      "step_name": "Sort the two teaspoons",
+      "t_start": 75.66,
+      "t_end": 96.86,
+      "f_start": 3783,
+      "f_end": 4843
+    },
+    {
+      "step_n": 5,
+      "step_name": "Sort the wooden serving utensil",
+      "t_start": 96.86,
+      "t_end": 160.06,
+      "f_start": 4843,
+      "f_end": 8003
+    },
+    {
+      "step_n": 6,
+      "step_name": "Move the loaded drawer insert to the right",
+      "t_start": 160.06,
+      "t_end": 166.0,
+      "f_start": 8003,
+      "f_end": 8300
+    },
+    {
+      "step_n": 7,
+      "step_name": "Verify the finished task and hold the final arm positions",
+      "t_start": 166.0,
+      "t_end": 177.7,
+      "f_start": 8300,
+      "f_end": 8885
+    }
+  ],
+  "subtasks": [
+    {
+      "seq": 1,
+      "step_n": 1,
+      "name": "Place one dinner spoon in the insert",
+      "occurrence": 1,
+      "object": "dinner spoon",
+      "object_detail": null,
+      "t_start": 0.0,
+      "t_end": 3.94,
+      "f_start": 0,
+      "f_end": 197,
+      "status": "ok",
+      "recovery_t": null,
+      "note": null
+    },
+    {
+      "seq": 2,
+      "step_n": 1,
+      "name": "Place one dinner spoon in the insert",
+      "occurrence": 2,
+      "object": "dinner spoon",
+      "object_detail": null,
+      "t_start": 3.94,
+      "t_end": 34.0,
+      "f_start": 197,
+      "f_end": 1700,
+      "status": "suboptimal",
+      "recovery_t": 15.0,
+      "note": "retry: 1 missed grasp(s); final attempt starts at t=15.00s"
+    },
+    {
+      "seq": 3,
+      "step_n": 2,
+      "name": "Place one fork in the insert",
+      "occurrence": 1,
+      "object": "fork",
+      "object_detail": null,
+      "t_start": 34.0,
+      "t_end": 41.66,
+      "f_start": 1700,
+      "f_end": 2083,
+      "status": "ok",
+      "recovery_t": null,
+      "note": null
+    },
+    {
+      "seq": 4,
+      "step_n": 2,
+      "name": "Place one fork in the insert",
+      "occurrence": 2,
+      "object": "fork",
+      "object_detail": null,
+      "t_start": 41.66,
+      "t_end": 66.42,
+      "f_start": 2083,
+      "f_end": 3321,
+      "status": "suboptimal",
+      "recovery_t": 52.6,
+      "note": "retry: 1 missed grasp(s), 1 re-grasp(s) after placing; final attempt starts at t=52.60s"
+    },
+    {
+      "seq": 5,
+      "step_n": 3,
+      "name": "Place one knife in the insert",
+      "occurrence": 1,
+      "object": "knife",
+      "object_detail": null,
+      "t_start": 66.42,
+      "t_end": 67.14,
+      "f_start": 3321,
+      "f_end": 3357,
+      "status": "ok",
+      "recovery_t": null,
+      "note": null
+    },
+    {
+      "seq": 6,
+      "step_n": 3,
+      "name": "Place one knife in the insert",
+      "occurrence": 2,
+      "object": "knife",
+      "object_detail": null,
+      "t_start": 67.14,
+      "t_end": 75.66,
+      "f_start": 3357,
+      "f_end": 3783,
+      "status": "ok",
+      "recovery_t": null,
+      "note": null
+    },
+    {
+      "seq": 7,
+      "step_n": 4,
+      "name": "Place one teaspoon in the insert",
+      "occurrence": 1,
+      "object": "teaspoon",
+      "object_detail": null,
+      "t_start": 75.66,
+      "t_end": 93.42,
+      "f_start": 3783,
+      "f_end": 4671,
+      "status": "ok",
+      "recovery_t": null,
+      "note": null
+    },
+    {
+      "seq": 8,
+      "step_n": 4,
+      "name": "Place one teaspoon in the insert",
+      "occurrence": 2,
+      "object": "teaspoon",
+      "object_detail": null,
+      "t_start": 93.42,
+      "t_end": 96.86,
+      "f_start": 4671,
+      "f_end": 4843,
+      "status": "ok",
+      "recovery_t": null,
+      "note": null
+    },
+    {
+      "seq": 9,
+      "step_n": 5,
+      "name": "Place the wooden serving utensil in the insert",
+      "occurrence": 1,
+      "object": "wooden utensil",
+      "object_detail": null,
+      "t_start": 96.86,
+      "t_end": 160.06,
+      "f_start": 4843,
+      "f_end": 8003,
+      "status": "suboptimal",
+      "recovery_t": 150.2,
+      "note": "retry: 3 missed grasp(s); final attempt starts at t=150.20s"
+    },
+    {
+      "seq": 10,
+      "step_n": 6,
+      "name": "Slide the loaded insert to the right-side finished zone",
+      "occurrence": 1,
+      "object": "insert",
+      "object_detail": null,
+      "t_start": 160.06,
+      "t_end": 166.0,
+      "f_start": 8003,
+      "f_end": 8300,
+      "status": "ok",
+      "recovery_t": null,
+      "note": null
+    },
+    {
+      "seq": 11,
+      "step_n": 7,
+      "name": "Verify the finished task and hold the final arm positions",
+      "occurrence": 1,
+      "object": null,
+      "object_detail": null,
+      "t_start": 166.0,
+      "t_end": 177.7,
+      "f_start": 8300,
+      "f_end": 8885,
+      "status": "ok",
+      "recovery_t": null,
+      "note": null
+    }
+  ]
+}

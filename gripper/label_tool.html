@@ -1,0 +1,317 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Gripper labeler</title>
+<style>
+:root{--bg:#16181c;--panel:#1f2228;--line:#2e323a;--text:#e6e6e6;--mute:#8b919c;
+      --open:#2ecc71;--closed:#e74c3c;--unknown:#f1c40f;--pending:#3da5ff;--sel:#c48bff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:13px/1.4 system-ui,sans-serif;display:flex;height:100vh;overflow:hidden}
+#side{width:270px;background:var(--panel);border-right:1px solid var(--line);display:flex;flex-direction:column}
+#side header{padding:8px;border-bottom:1px solid var(--line)}
+#side select{width:100%;background:var(--bg);color:var(--text);border:1px solid var(--line);padding:3px}
+#list{flex:1;overflow-y:auto}
+.row{padding:3px 8px;cursor:pointer;display:flex;gap:6px;align-items:center;white-space:nowrap;font-family:ui-monospace,monospace;font-size:12px}
+.row:hover{background:#2a2e36}.row.cur{background:#30425a}
+.dot{width:8px;height:8px;border-radius:50%;flex:none}
+.todo .dot{background:#666}.done .dot{background:var(--open)}.skip .dot{background:#a55}
+.row .src{color:var(--mute);overflow:hidden;text-overflow:ellipsis}
+.row .pend{color:var(--pending)}
+#main{flex:1;display:flex;flex-direction:column;min-width:0}
+#bar{padding:6px 10px;border-bottom:1px solid var(--line);display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+#bar b{font-family:ui-monospace,monospace}
+.cls{padding:2px 8px;border-radius:4px;border:1px solid var(--line);cursor:pointer}
+.cls.on{outline:2px solid var(--sel)}
+#wrap{flex:1;position:relative;overflow:hidden;background:#000}
+canvas{position:absolute;inset:0}
+#peek{position:absolute;top:8px;left:8px;background:#000a;padding:4px 8px;border-radius:4px;display:none;font-weight:600}
+#help{position:absolute;right:8px;top:8px;background:#000c;padding:8px 10px;border-radius:6px;font-size:12px;max-width:390px;display:none}
+#help kbd{background:#333;border-radius:3px;padding:0 4px;font-family:ui-monospace,monospace}
+#msg{color:var(--mute)}
+</style></head>
+<body>
+<div id="side">
+  <header>
+    <select id="filter"><option value="all">all items</option><option value="todo" selected>todo only</option>
+      <option value="done">done</option><option value="skip">skip</option></select>
+    <div id="prog" style="margin-top:6px;color:var(--mute)"></div>
+  </header>
+  <div id="list"></div>
+</div>
+<div id="main">
+  <div id="bar">
+    <b id="title">-</b><span id="meta" style="color:var(--mute)"></span>
+    <span>new box: <span class="cls" data-c="0">1 open</span> <span class="cls" data-c="1">2 closed</span>
+      <span class="cls" data-c="2">3 unknown</span>
+      <span class="cls" data-c="3" title="gripper located, state not decided yet">4 gripper (待定)</span></span>
+    <span id="mode" style="color:var(--sel);font-weight:600"></span>
+    <span id="msg"></span>
+    <span style="margin-left:auto;color:var(--mute)"><a href="/state" style="color:var(--mute)">timeline</a> · press <kbd>H</kbd> for help</span>
+  </div>
+  <div id="wrap"><canvas id="cv"></canvas><div id="peek"></div>
+    <div id="help">
+      <b>Boxes</b><br>
+      drag on empty area: new box (class = highlighted) &nbsp; click: select &nbsp; drag box/handles: move/resize<br>
+      <kbd>1</kbd><kbd>2</kbd><kbd>3</kbd> open / closed / unknown, <kbd>4</kbd> gripper (state not decided)
+      — sets the selected box (and the next new box)<br>
+      <kbd>R</kbd> redraw the selected box: next drag replaces its rectangle, class kept
+      (fastest way to fix a loose YOLOE box)<br>
+      <kbd>I</kbd><kbd>J</kbd><kbd>K</kbd><kbd>L</kbd> move the selected box's top/left/bottom/right edge
+      outward by 2 px, with <kbd>Shift</kbd> inward<br>
+      <kbd>Tab</kbd> next box &nbsp; <kbd>Del</kbd>/<kbd>Backspace</kbd> delete &nbsp; <kbd>Ctrl/⌘ Z</kbd> undo &nbsp; <kbd>C</kbd> clear all<br>
+      <b>View</b><br>
+      wheel: zoom &nbsp; right/middle-drag or <kbd>Space</kbd>+drag: pan &nbsp; <kbd>F</kbd> fit<br>
+      hold <kbd>Q</kbd>/<kbd>E</kbd>: show frame −5/+5 (with <kbd>Shift</kbd>: −1/+1) for context<br>
+      <b>Items</b><br>
+      <kbd>Enter</kbd> mark DONE → next todo &nbsp; <kbd>X</kbd> skip (unusable frame) &nbsp; <kbd>U</kbd> back to todo<br>
+      <kbd>A</kbd>/<kbd>D</kbd> or <kbd>←</kbd>/<kbd>→</kbd> previous/next item (edits are saved)<br>
+      <kbd>[</kbd>/<kbd>]</kbd> add frame −5/+5 as a new item (boxes copied), <kbd>{</kbd>/<kbd>}</kbd> −1/+1<br>
+      <b>Rule</b>: box only the gripper head (wrist camera/flange → fingertips), never the arm.
+      Fingers visibly apart → open; fingers together or clamped on an object → closed;
+      gripper visible but state not decidable (occluded fingers, blur) → unknown.
+      Fingers not visible at all → no box. Dashed = model proposal, becomes a label when you press Enter.
+      Blue "gripper" boxes (YOLOE) only say where a gripper might be: fix the box, then press 1/2/3 —
+      Enter refuses while one is left.
+    </div>
+  </div>
+</div>
+<script>
+const CLASSES = __LABELS__, PENDING = __PENDING__;
+const COLORS = {gripper_open:'#2ecc71', gripper_closed:'#e74c3c', gripper_unknown:'#f1c40f', gripper:'#3da5ff'};
+const SHORT = {gripper_open:'open', gripper_closed:'closed', gripper_unknown:'unknown', gripper:'gripper?'};
+const cv = document.getElementById('cv'), ctx = cv.getContext('2d'), wrap = document.getElementById('wrap');
+let items = [], cur = null, img = null, peekImg = null, boxes = [], sel = -1, newCls = 0, hist = [];
+let view = {s: 1, ox: 0, oy: 0}, drag = null, spaceDown = false, dirty = false, mouse = {x: 0, y: 0};
+let redraw = -1;  // index of the box whose rectangle the next drag replaces (R)
+function setRedraw(k){ redraw = k; $('mode').textContent = k >= 0 ? 'REDRAW: drag a new rectangle (Esc cancels)' : ''; }
+
+const $ = id => document.getElementById(id);
+const api = (url, body) => fetch(url, body ? {method:'POST', headers:{'Content-Type':'application/json'},
+  body: JSON.stringify(body)} : {}).then(r => r.ok ? r.json() : r.json().then(e => Promise.reject(e.error)));
+const msg = t => { $('msg').textContent = t; clearTimeout(msg.t); msg.t = setTimeout(() => $('msg').textContent = '', 2500); };
+
+// ---------- list ----------
+async function loadList(){ items = await api('/api/items'); renderList(); }
+function renderList(){
+  const f = $('filter').value, L = $('list'); L.innerHTML = '';
+  items.forEach((it, k) => {
+    if (f !== 'all' && it.status !== f && (!cur || it.id !== cur.id)) return;
+    const d = document.createElement('div');
+    d.className = `row ${it.status}` + (cur && it.id === cur.id ? ' cur' : '');
+    d.innerHTML = `<span class="dot"></span>${it.id}` + (it.pending ? `<span class="pend">${it.pending}?</span>` : '') +
+      `<span class="src">${it.n}▢ ${it.source}</span>`;
+    d.onclick = () => open(k); L.appendChild(d);
+  });
+  const done = items.filter(i => i.status === 'done').length;
+  $('prog').textContent = `${done} done / ${items.filter(i => i.status !== 'skip').length} usable / ${items.length} total`;
+  const c = L.querySelector('.cur'); if (c) c.scrollIntoView({block:'nearest'});
+}
+
+// ---------- item ----------
+async function save(status){
+  if (!cur || (!dirty && !status)) return;
+  dirty = false;
+  let it;
+  try { it = await api('/api/item', {id: cur.id, boxes, ...(status ? {status} : {})}); }
+  catch(e){ dirty = true; msg('SAVE FAILED: ' + e); throw e; }
+  const s = items.find(i => i.id === it.id);
+  Object.assign(s, {status: it.status, n: it.boxes.length, pending: it.boxes.filter(b => b.cls === PENDING).length});
+  if (it.id === cur.id){ Object.assign(cur, it);
+    $('meta').textContent = `${cur.video}  frame ${cur.frame}  t=${cur.t.toFixed(3)}s  seg ${cur.seg ?? '-'}  [${cur.status}]  ${cur.source}`; }
+  renderList();
+}
+async function open(k){
+  if (k < 0 || k >= items.length) return;
+  await save();
+  cur = await api('/api/item?id=' + encodeURIComponent(items[k].id));
+  boxes = cur.boxes.map(b => ({...b, xyxy: [...b.xyxy]})); sel = -1; hist = []; peekImg = null; setRedraw(-1);
+  $('title').textContent = cur.id;
+  $('meta').textContent = `${cur.video}  frame ${cur.frame}  t=${cur.t.toFixed(3)}s  seg ${cur.seg ?? '-'}  [${cur.status}]  ${cur.source}`;
+  img = new Image(); img.onload = () => { if (!view.fitted) fit(); draw(); };
+  img.src = '/img?id=' + encodeURIComponent(cur.id);
+  renderList();
+}
+const idx = () => items.findIndex(i => i.id === cur.id);
+function nextTodo(){
+  const k = idx();
+  for (let j = 1; j <= items.length; j++){ const m = (k + j) % items.length; if (items[m].status === 'todo') return open(m); }
+  msg('no todo items left'); open(Math.min(k + 1, items.length - 1));
+}
+async function addNeighbour(off){
+  await save();
+  try { const it = await api('/api/add', {from: cur.id, frame: cur.frame + off});
+        await loadList(); open(items.findIndex(i => i.id === it.id)); msg(`added ${it.id}`); }
+  catch(e){ msg('add failed: ' + e); }
+}
+
+// ---------- geometry ----------
+function fit(){
+  const W = wrap.clientWidth, H = wrap.clientHeight; cv.width = W; cv.height = H;
+  if (!img || !img.naturalWidth) return;
+  const s = Math.min(W / img.naturalWidth, H / img.naturalHeight);
+  view = {s, ox: (W - img.naturalWidth * s) / 2, oy: (H - img.naturalHeight * s) / 2, fitted: true};
+}
+const toImg = (x, y) => [(x - view.ox) / view.s, (y - view.oy) / view.s];
+const toScr = (x, y) => [x * view.s + view.ox, y * view.s + view.oy];
+function clampBox(b){
+  const W = img.naturalWidth, H = img.naturalHeight;
+  let [x1, y1, x2, y2] = b; [x1, x2] = [Math.min(x1, x2), Math.max(x1, x2)]; [y1, y2] = [Math.min(y1, y2), Math.max(y1, y2)];
+  return [Math.max(0, x1), Math.max(0, y1), Math.min(W, x2), Math.min(H, y2)];
+}
+function handles(b){
+  const [x1, y1, x2, y2] = b, mx = (x1 + x2) / 2, my = (y1 + y2) / 2;
+  return {nw:[x1,y1], n:[mx,y1], ne:[x2,y1], e:[x2,my], se:[x2,y2], s:[mx,y2], sw:[x1,y2], w:[x1,my]};
+}
+function hit(x, y){  // screen coords -> {k, part}
+  const r = 7;
+  if (sel >= 0){
+    for (const [h, p] of Object.entries(handles(boxes[sel].xyxy))){
+      const [sx, sy] = toScr(...p); if (Math.abs(sx - x) < r && Math.abs(sy - y) < r) return {k: sel, part: h};
+    }
+  }
+  const [ix, iy] = toImg(x, y);
+  let best = null, area = Infinity;  // smallest containing box wins
+  boxes.forEach((b, k) => { const [x1, y1, x2, y2] = b.xyxy;
+    if (ix >= x1 && ix <= x2 && iy >= y1 && iy <= y2 && (x2 - x1) * (y2 - y1) < area){ area = (x2 - x1) * (y2 - y1); best = {k, part: 'move'}; } });
+  return best;
+}
+function push(){ hist.push(JSON.stringify(boxes)); if (hist.length > 100) hist.shift(); dirty = true; }
+
+// ---------- drawing ----------
+function draw(){
+  ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.clearRect(0, 0, cv.width, cv.height);
+  const im = peekImg || img; if (!im || !im.naturalWidth) return;
+  ctx.imageSmoothingEnabled = view.s < 2;
+  ctx.drawImage(im, view.ox, view.oy, im.naturalWidth * view.s, im.naturalHeight * view.s);
+  if (peekImg) return;
+  boxes.forEach((b, k) => {
+    const [x1, y1] = toScr(b.xyxy[0], b.xyxy[1]), [x2, y2] = toScr(b.xyxy[2], b.xyxy[3]);
+    ctx.strokeStyle = COLORS[b.cls]; ctx.lineWidth = k === sel ? 3 : 2;
+    ctx.setLineDash(b.by === 'human' ? [] : [7, 5]); ctx.strokeRect(x1, y1, x2 - x1, y2 - y1); ctx.setLineDash([]);
+    const label = SHORT[b.cls] + (b.by !== 'human' ? (b.conf != null ? ` ${b.conf.toFixed(2)}` : ' ?') : '');
+    ctx.font = '600 13px system-ui'; const tw = ctx.measureText(label).width + 8;
+    ctx.fillStyle = COLORS[b.cls]; ctx.fillRect(x1, y1 - 18, tw, 18);
+    ctx.fillStyle = '#000'; ctx.fillText(label, x1 + 4, y1 - 5);
+    if (k === sel){ ctx.fillStyle = '#fff';
+      for (const p of Object.values(handles(b.xyxy))){ const [sx, sy] = toScr(...p); ctx.fillRect(sx - 4, sy - 4, 8, 8); } }
+  });
+  if (drag && drag.part === 'new'){
+    const [x1, y1] = toScr(drag.ix, drag.iy), [x2, y2] = toScr(...toImg(mouse.x, mouse.y));
+    ctx.strokeStyle = drag.replace != null ? COLORS[boxes[drag.replace].cls] : COLORS[CLASSES[newCls]];
+    ctx.lineWidth = 2; ctx.strokeRect(x1, y1, x2 - x1, y2 - y1);
+  }
+  // crosshair helps aligning box edges with fingertips
+  ctx.strokeStyle = '#ffffff40'; ctx.lineWidth = 1; ctx.beginPath();
+  ctx.moveTo(mouse.x, 0); ctx.lineTo(mouse.x, cv.height); ctx.moveTo(0, mouse.y); ctx.lineTo(cv.width, mouse.y); ctx.stroke();
+}
+// key 1-4 or class button: set the next new box's class, and the selected box's class if any
+function applyCls(c){ setNewCls(c);
+  if (sel >= 0){ push(); boxes[sel].cls = CLASSES[c]; boxes[sel].by = 'human'; delete boxes[sel].conf; } draw(); }
+function setNewCls(c){ newCls = c; document.querySelectorAll('.cls').forEach(e => e.classList.toggle('on', +e.dataset.c === c)); }
+
+// ---------- mouse ----------
+cv.addEventListener('contextmenu', e => e.preventDefault());
+cv.addEventListener('mousedown', e => {
+  mouse = {x: e.offsetX, y: e.offsetY};
+  if (e.button === 1 || e.button === 2 || spaceDown){ drag = {part: 'pan', x: e.offsetX, y: e.offsetY, ox: view.ox, oy: view.oy}; return; }
+  const [ix, iy] = toImg(e.offsetX, e.offsetY);
+  if (redraw >= 0){ sel = redraw; drag = {part: 'new', ix, iy, replace: redraw}; draw(); return; }
+  const h = hit(e.offsetX, e.offsetY);
+  if (h){ sel = h.k; push(); drag = {...h, ix, iy, orig: [...boxes[h.k].xyxy]}; }
+  else { sel = -1; drag = {part: 'new', ix, iy}; }
+  draw();
+});
+window.addEventListener('mousemove', e => {
+  const r = cv.getBoundingClientRect(); mouse = {x: e.clientX - r.left, y: e.clientY - r.top};
+  if (!drag){ draw(); return; }
+  if (drag.part === 'pan'){ view.ox = drag.ox + mouse.x - drag.x; view.oy = drag.oy + mouse.y - drag.y; draw(); return; }
+  const [ix, iy] = toImg(mouse.x, mouse.y);
+  if (drag.part !== 'new'){
+    const b = boxes[drag.k], o = drag.orig, dx = ix - drag.ix, dy = iy - drag.iy;
+    if (drag.part === 'move') b.xyxy = [o[0] + dx, o[1] + dy, o[2] + dx, o[3] + dy];
+    else { const n = [...o];
+      if (drag.part.includes('w')) n[0] = o[0] + dx; if (drag.part.includes('e')) n[2] = o[2] + dx;
+      if (drag.part.includes('n')) n[1] = o[1] + dy; if (drag.part.includes('s')) n[3] = o[3] + dy;
+      b.xyxy = n; }
+    b.by = 'human';
+  }
+  draw();
+});
+window.addEventListener('mouseup', () => {
+  if (!drag) return;
+  if (drag.part === 'new'){
+    const [ix, iy] = toImg(mouse.x, mouse.y);
+    if (Math.abs(ix - drag.ix) > 4 && Math.abs(iy - drag.iy) > 4){
+      push(); const xyxy = clampBox([drag.ix, drag.iy, ix, iy]);
+      if (drag.replace != null){ const b = boxes[drag.replace]; b.xyxy = xyxy; b.by = 'human'; delete b.conf; sel = drag.replace; }
+      else { boxes.push({cls: CLASSES[newCls], xyxy, by: 'human'}); sel = boxes.length - 1; } }
+    setRedraw(-1);
+  } else if (drag.part !== 'pan'){ boxes[drag.k].xyxy = clampBox(boxes[drag.k].xyxy); }
+  drag = null; draw();
+});
+cv.addEventListener('wheel', e => {
+  e.preventDefault(); const f = Math.exp(-e.deltaY * 0.0015), [ix, iy] = toImg(e.offsetX, e.offsetY);
+  view.s = Math.min(20, Math.max(0.1, view.s * f)); view.ox = e.offsetX - ix * view.s; view.oy = e.offsetY - iy * view.s; draw();
+}, {passive: false});
+
+// ---------- keyboard ----------
+let peekKey = null;
+function peek(off){
+  const im = new Image(); peekKey = off;
+  im.onload = () => { if (peekKey === off){ peekImg = im; $('peek').style.display = 'block';
+    $('peek').textContent = `PEEK frame ${cur.frame + off} (${off > 0 ? '+' : ''}${off})`; draw(); } };
+  im.src = `/peek?id=${encodeURIComponent(cur.id)}&off=${off}`;
+}
+function unpeek(){ peekKey = null; peekImg = null; $('peek').style.display = 'none'; draw(); }
+window.addEventListener('keyup', e => {
+  if (e.key === ' ') spaceDown = false;
+  if ('qQeE'.includes(e.key) || e.key === 'Shift') unpeek();
+});
+window.addEventListener('keydown', e => {
+  if (e.target.tagName === 'SELECT') return;
+  const k = e.key;
+  if (k === ' '){ spaceDown = true; e.preventDefault(); return; }
+  if ((e.ctrlKey || e.metaKey) && k.toLowerCase() === 'z'){ if (hist.length){ boxes = JSON.parse(hist.pop()); sel = -1; dirty = true; draw(); } e.preventDefault(); return; }
+  if (e.ctrlKey || e.metaKey || e.altKey) return;
+  if (k === 'Escape'){ setRedraw(-1); sel = -1; draw(); return; }
+  if (['1', '2', '3', '4'].includes(k)){ applyCls(+k - 1); }
+  else if (k === 'r' || k === 'R'){ if (sel >= 0) setRedraw(sel); else msg('select a box first'); }
+  else if ('iIjJkKlL'.includes(k) && k.length === 1){
+    if (sel < 0) return; push(); const d = e.shiftKey ? -2 : 2, b = boxes[sel], x = b.xyxy;
+    const kk = k.toLowerCase();
+    if (kk === 'i') x[1] -= d; if (kk === 'k') x[3] += d; if (kk === 'j') x[0] -= d; if (kk === 'l') x[2] += d;
+    b.xyxy = clampBox(x); b.by = 'human'; delete b.conf; draw(); }
+  else if (k === 'Tab'){ e.preventDefault(); if (boxes.length){ sel = (sel + 1) % boxes.length; draw(); } }
+  else if (k === 'Delete' || k === 'Backspace'){ if (sel >= 0){ push(); boxes.splice(sel, 1); sel = -1; draw(); } e.preventDefault(); }
+  else if (k === 'c' || k === 'C'){ if (boxes.length){ push(); boxes = []; sel = -1; draw(); } }
+  else if (k === 'f' || k === 'F'){ fit(); draw(); }
+  else if (k === 'h' || k === 'H'){ const h = $('help'); h.style.display = h.style.display === 'block' ? 'none' : 'block'; }
+  else if (k === 'Enter'){ e.preventDefault();
+    const p = boxes.findIndex(b => b.cls === PENDING);
+    if (p >= 0){ sel = p; draw(); msg(`blue "${PENDING}" box needs a state: press 1/2/3 (or Del)`); return; }
+    save('done').then(nextTodo).catch(() => {}); }
+  else if (k === 'x' || k === 'X'){ save('skip').then(nextTodo); }
+  else if (k === 'u' || k === 'U'){ save('todo').then(() => open(idx())); }
+  else if (k === 'ArrowRight' || k === 'd' || k === 'D'){ open(idx() + 1); }
+  else if (k === 'ArrowLeft' || k === 'a' || k === 'A'){ open(idx() - 1); }
+  else if (k === 'q' || k === 'Q'){ if (!e.repeat) peek(e.shiftKey ? -1 : -5); }
+  else if (k === 'e' || k === 'E'){ if (!e.repeat) peek(e.shiftKey ? 1 : 5); }
+  else if (k === '['){ addNeighbour(-5); } else if (k === ']'){ addNeighbour(5); }
+  else if (k === '{'){ addNeighbour(-1); } else if (k === '}'){ addNeighbour(1); }
+});
+document.querySelectorAll('.cls').forEach(e => e.onclick = () => applyCls(+e.dataset.c));
+$('filter').onchange = renderList;
+window.addEventListener('resize', () => { fit(); draw(); });
+setInterval(() => { if (dirty && !drag) save(); }, 1500);  // autosave
+window.addEventListener('beforeunload', e => { if (dirty){ e.preventDefault(); e.returnValue = ''; } });
+
+setNewCls(0);
+// /#<item id> (link from the timeline page, key A) opens that item
+function openHash(){
+  const id = decodeURIComponent(location.hash.slice(1)), k = items.findIndex(i => i.id === id);
+  if (k >= 0){ $('filter').value = 'all'; open(k); return true; }
+  return false;
+}
+window.addEventListener('hashchange', () => loadList().then(openHash));
+loadList().then(() => { if (openHash()) return;
+  const k = items.findIndex(i => i.status === 'todo'); open(k >= 0 ? k : 0); });
+</script>
+</body></html>

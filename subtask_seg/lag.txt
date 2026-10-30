@@ -1,0 +1,29 @@
+train 13_fold_three_pairs_of_pants|2934-3433|L      human releases  0  detected  0  errors []
+train 13_fold_three_pairs_of_pants|2934-3433|R      human releases  4  detected  4  errors [-1, -1, 0, 0]
+train 13_fold_three_pairs_of_pants|4556-5055|L      human releases  0  detected  0  errors []
+train 13_fold_three_pairs_of_pants|4556-5055|R      human releases  0  detected  1  errors []
+train 13_fold_three_pairs_of_pants|487-986|L        human releases  2  detected  2  errors [-2, 0]
+train 13_fold_three_pairs_of_pants|487-986|R        human releases  0  detected  1  errors []
+val   13_fold_three_pairs_of_pants|5430-5929|L      human releases  2  detected  1  errors [-18]
+val   13_fold_three_pairs_of_pants|5430-5929|R      human releases  2  detected  3  errors [0]
+train 14_full_wipe_down_sequence|1791-2290|L        human releases  0  detected  0  errors []
+train 14_full_wipe_down_sequence|1791-2290|R        human releases  1  detected  1  errors [-2]
+val   14_full_wipe_down_sequence|488-987|L          human releases  1  detected  2  errors [-7]
+val   14_full_wipe_down_sequence|488-987|R          human releases  0  detected  0  errors []
+train 16_lace_and_tie_a_shoe|11185-11684|L          human releases  1  detected  1  errors [-1]
+train 16_lace_and_tie_a_shoe|11185-11684|R          human releases  4  detected  4  errors [0, 0, 0, -3]
+train 16_lace_and_tie_a_shoe|4897-5396|L            human releases  1  detected  1  errors [-1]
+train 16_lace_and_tie_a_shoe|4897-5396|R            human releases  2  detected  2  errors [-1, -1]
+train 16_lace_and_tie_a_shoe|53-552|L               human releases  1  detected  1  errors [-3]
+train 16_lace_and_tie_a_shoe|53-552|R               human releases  0  detected  0  errors []
+val   16_lace_and_tie_a_shoe|7015-7514|L            human releases  0  detected  1  errors []
+val   16_lace_and_tie_a_shoe|7015-7514|R            human releases  1  detected  0  errors []
+train 21_portion_dry_goods_into_jars|208-707|L      human releases  0  detected  0  errors []
+train 21_portion_dry_goods_into_jars|208-707|R      human releases  0  detected  0  errors []
+train 21_portion_dry_goods_into_jars|2499-2998|L    human releases  1  detected  1  errors [-1]
+train 21_portion_dry_goods_into_jars|2499-2998|R    human releases  0  detected  0  errors []
+
+val: n=3  signed median -7f  mean -8.3f  median|e| 7f  within ±25f 100%  | missed 3  extra detections 4
+train: n=17  signed median -1f  mean -1.0f  median|e| 1f  within ±25f 100%  | missed 0  extra detections 2
+
+-> suggested ONSET_SHIFT = -7  (from val units; positive = pipeline is late)

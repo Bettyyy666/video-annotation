@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Task ground truth · 逐帧播放器</title>
+<style>
+:root{color-scheme:dark;--bg:#12151a;--panel:#1c2129;--line:#37404e;--ink:#f1f4fa;--muted:#aeb9c9;--accent:#9acaff}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px system-ui,-apple-system,sans-serif}
+main{max-width:1480px;margin:auto;padding:18px 24px 40px}header{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+h1{font-size:20px;margin:0 0 8px}p{line-height:1.5}button,input,select{font:inherit;border:1px solid var(--line);border-radius:6px;background:#262e39;color:var(--ink);padding:7px 10px}
+button{cursor:pointer}button:hover{background:#344258}button:disabled{opacity:.4;cursor:default}button.primary{background:#b4d6ff;color:#142943;font-weight:600}
+input[type=number]{width:105px}input[type=range]{width:100%;padding:0;accent-color:var(--accent)}input[type=file]{max-width:280px}
+.muted{font-size:13px;color:var(--muted)}.bar{display:flex;align-items:center;flex-wrap:wrap;gap:9px;margin:12px 0}.spacer{flex:1}
+.screen{position:relative;background:#06080b;border:1px solid var(--line);border-radius:8px;min-height:220px;display:flex;justify-content:center;align-items:center}
+#frameImage{display:block;max-width:100%;height:min(65vh,850px);object-fit:contain}#loading{position:absolute;background:#1c2129e8;padding:12px 20px;border-radius:6px}
+#position{font:600 18px ui-monospace,monospace;color:var(--accent)}kbd{padding:2px 5px;border:1px solid var(--line);border-radius:4px;color:var(--ink)}
+details{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px;margin-top:16px}summary{cursor:pointer;font-weight:600}
+.taskselect{min-width:min(640px,100%);max-width:100%}#endCondition{color:#c2dbfa;line-height:1.5}.notice{white-space:pre-wrap;color:#ffcf91;min-height:20px}
+.card{border-top:1px solid var(--line);padding:14px 0}.card .row{width:min(850px,100%)}.text{width:min(420px,100%)}.danger{color:#ffb6b6}
+.editor-grid{display:grid;grid-template-columns:repeat(4,minmax(130px,1fr));gap:12px}.editor-grid label{display:flex;flex-direction:column;gap:5px;color:var(--muted);font-size:13px}.editor-grid input,.editor-grid select,.editor-grid textarea{width:100%;min-width:0}.editor-grid .wide{grid-column:span 2}textarea{font:14px ui-monospace,monospace;background:#111720;color:var(--ink);border:1px solid var(--line);border-radius:5px;padding:9px}pre{white-space:pre-wrap;word-break:break-word;max-height:440px;overflow:auto;font-size:13px}.step-table{width:100%;border-collapse:collapse;font-size:13px}.step-table td,.step-table th{text-align:left;padding:8px;border-bottom:1px solid var(--line)}.selected{border-left:3px solid var(--accent);padding-left:12px}#editor{border:1px solid #6388b3;border-radius:8px;padding:14px;margin:16px 0}#pasteJson{width:100%;min-height:160px}
+@media(max-width:700px){main{padding:12px}#frameImage{height:48vh}.taskselect{min-width:100%}}
+@media(max-width:700px){.editor-grid{grid-template-columns:repeat(2,minmax(100px,1fr))}}
+</style></head><body><main>
+<header><h1 id="title">__PLAYER_TITLE__</h1><span class="muted" id="videoMeta">__PLAYER_META__</span></header>
+<details id="videoImportPanel"><summary>导入 / 切换视频</summary>
+<p class="muted">选择本机视频后准备逐帧画面，无需 GPU。文件仅在本机处理；目前支持原始 50 FPS 视频，最大 2 GB。不同视频分别保存标注草稿。</p>
+<div class="bar"><label>视频文件 <input id="videoFile" type="file" accept=".mp4,.mov,.m4v,.avi,.mkv,.webm"></label>
+<label>视频任务 <select id="videoTask"><option value="">根据文件名自动匹配</option></select></label>
+<button id="importVideo" class="primary">导入视频</button></div>
+<p id="videoImportStatus" class="notice" role="status"></p><progress id="videoImportProgress" hidden max="100"></progress>
+<div class="bar"><label>已准备的视频 <select id="preparedVideo"></select></label><button id="openVideo">打开所选视频</button><button id="refreshVideos">刷新列表</button></div>
+</details>
+<p id="startup" class="notice">播放器正在初始化。如果这条提示一直不消失，请双击task_player_assets 里的“打开播放器.command”，在浏览器中使用；静态 HTML 预览可能不执行脚本。</p>
+<noscript><p class="notice">当前页面未运行 JavaScript，无法跳帧。请在支持 JavaScript 的浏览器中打开播放器。</p></noscript>
+<div class="screen"><img id="frameImage" src="frames/000000.jpg" alt="当前视频帧"><div id="loading">载入帧…</div></div>
+<div class="bar"><span id="position"></span><span class="spacer"></span><span class="muted">原视频顺序解码 · 从第 0 帧计数</span></div>
+<input id="scrubber" aria-label="视频帧位置" type="range" min="0" value="0" step="1">
+<div class="bar">
+<button id="back10">← 前 10 帧</button><button id="back1">前 1 帧</button><button id="play">自动前进</button><button id="forward1">后 1 帧</button><button id="forward10" class="primary">后 10 帧 →</button>
+<label>帧号 <input id="jumpFrame" type="number" min="0" value="0" step="1"></label><button id="jump">跳转</button>
+<button id="last">最后一帧</button><button id="copy">复制当前帧号</button></div>
+<div class="bar"><button id="editAtFrame">编辑播放位置的 subtask</button><button id="setRecovery">当前帧设为 recovery（R）</button><span id="editingTarget" class="muted">尚未选择编辑项</span></div>
+<div class="muted"><kbd>←</kbd> / <kbd>→</kbd> 跳 10 帧 · <kbd>Shift</kbd>＋方向键跳 1 帧 · <kbd>Space</kbd> 自动前进/暂停（每次 10 帧） · <kbd>Home</kbd> / <kbd>End</kbd> 首尾帧 · <kbd>B</kbd> 记录 subtask 结束帧</div>
+<p id="message" class="notice" role="status"></p>
+<details id="annotationPanel"><summary>记录 task ground truth（可选）</summary>
+<p class="muted">选择本段 task，停在结束帧，按 B 或下面的记录按钮。第一段自动从 0 开始；后续段从上一段结束处开始。这里没有预填模型预测。</p>
+<select id="taskRow" class="taskselect" aria-label="当前 subtask"></select><p id="endCondition"></p>
+<div class="bar"><button id="mark" class="primary">记录当前帧为本段结束</button><span id="nextStart" class="muted"></span></div>
+<details><summary>Task sheet notes</summary><div id="taskNotes"></div></details>
+<div class="bar"><label>Robot <input id="robot" placeholder="null（留空）"></label><label>Episode outcome <select id="outcome"><option value="">null（未确定）</option><option value="success">success</option><option value="failed">failed</option></select></label>
+<label>人工耗时（分钟） <input id="minutes" type="number" min="0" step="0.1" placeholder="可稍后填"></label></div>
+<div class="bar"><button id="saveDraft">下载草稿（可继续编辑）</button><label>载入草稿或标注 JSON <input id="importDraft" type="file" accept=".json"></label><button id="loadTemplate" hidden>载入你提供的 JSON</button></div>
+<details><summary>粘贴已有标注 JSON</summary><textarea id="pasteJson" aria-label="标注 JSON" placeholder='{"episode": {...}, "steps": [...], "subtasks": [...]}'></textarea><button id="importPaste">载入粘贴的 JSON</button></details>
+<div class="bar"><button id="downloadCurrent">下载当前 JSON（允许未完成）</button><button id="export" class="primary">校验并导出 ground truth JSON</button></div>
+<p id="saveState" class="muted"></p><p id="validation" class="notice"></p>
+<section id="editor" hidden><h2 id="editorTitle">编辑 subtask</h2><p class="muted">修改帧号会同步秒数；修改开始边界会联动上一段结束，修改结束边界会联动下一段开始。第一段固定从 0 开始。</p>
+<form id="editForm"><div class="editor-grid">
+<label>seq<input name="seq" type="number" step="1" required></label>
+<label>step_n<input name="step_n" type="number" step="1" required></label>
+<label>occurrence<input name="occurrence" type="number" step="1" required></label>
+<label>status<select name="status"><option>ok</option><option>suboptimal</option><option>failed</option></select></label>
+<label class="wide">name<input name="name" required></label>
+<label>object<input name="object" required></label>
+<label>object_detail<input name="object_detail" placeholder="null（留空）"></label>
+<label>f_start<input name="f_start" type="number" step="1" required></label>
+<label>t_start（秒）<input name="t_start" type="number" step="0.001" required></label>
+<label>f_end<input name="f_end" type="number" step="1" required></label>
+<label>t_end（秒）<input name="t_end" type="number" step="0.001" required></label>
+<label>recovery_t（秒）<input name="recovery_t" type="number" step="0.001" placeholder="null（留空）"></label>
+<label>recovery 帧<input name="recovery_frame" type="number" step="1" placeholder="null（留空）"></label>
+<label class="wide">note<textarea name="note" rows="2" placeholder="null（留空），或英文备注"></textarea></label>
+</div><div class="bar"><label><input name="new_step_interval" type="checkbox"> 从这里开始新一轮 step</label><button type="submit" class="primary">保存 subtask 修改</button><button id="cancelEdit" type="button">关闭编辑</button></div></form><p id="editError" class="notice"></p></section>
+<div id="segments"></div>
+<details open><summary>自动计算的 steps</summary><div id="stepsPreview"></div></details>
+<details><summary>当前 JSON 预览（episode / steps / subtasks）</summary><pre id="jsonPreview"></pre></details>
+</details></main>
+<script type="application/json" id="playerData">__PLAYER_DATA__</script>
+<script>__PLAYER_CORE__</script>
+<script>__PLAYER_APP__</script>
+</body></html>

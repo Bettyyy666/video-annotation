@@ -1,0 +1,2206 @@
+{
+ "fps": 50.0,
+ "T": 8886,
+ "onset_shift": -7,
+ "dp_cost": -505.2337204545451,
+ "vlm_counts": {
+  "dinner spoon": [
+   0.0,
+   0.0,
+   0.0095,
+   0.5163,
+   0.4021,
+   0.0699,
+   0.0021,
+   0.0001,
+   0.0,
+   0.0
+  ],
+  "fork": [
+   0.0,
+   0.0,
+   0.9996,
+   0.0004,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ],
+  "knife": [
+   0.0,
+   0.0953,
+   0.9045,
+   0.0002,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ],
+  "teaspoon": [
+   0.0,
+   0.0014,
+   0.7166,
+   0.2636,
+   0.0169,
+   0.0014,
+   0.0001,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ "vlm_conditions": {},
+ "vlm_top_row_per_clip": [
+  [
+   50,
+   "Place the wooden serving utensil in the "
+  ],
+  [
+   100,
+   "Place the wooden serving utensil in the "
+  ],
+  [
+   150,
+   "Place one teaspoon in the insert"
+  ],
+  [
+   200,
+   "Place one teaspoon in the insert"
+  ],
+  [
+   250,
+   "Place one fork in the insert"
+  ],
+  [
+   300,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   350,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   400,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   450,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   500,
+   "Place one dinner spoon in the insert"
+  ],
+  [
+   550,
+   "Place one knife in the insert"
+  ],
+  [
+   600,
+   "Place one dinner spoon in the insert"
+  ],
+  [
+   650,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   700,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   750,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   800,
+   "Place one teaspoon in the insert"
+  ],
+  [
+   850,
+   "Place one dinner spoon in the insert"
+  ],
+  [
+   900,
+   "Place one dinner spoon in the insert"
+  ],
+  [
+   950,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   1000,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   1050,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   1100,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   1150,
+   "Place one teaspoon in the insert"
+  ],
+  [
+   1200,
+   "Place one dinner spoon in the insert"
+  ],
+  [
+   1250,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   1300,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   1350,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   1400,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   1450,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   1500,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   1550,
+   "Place one teaspoon in the insert"
+  ],
+  [
+   1600,
+   "Place one teaspoon in the insert"
+  ],
+  [
+   1650,
+   "Place one teaspoon in the insert"
+  ],
+  [
+   1700,
+   "Place one dinner spoon in the insert"
+  ],
+  [
+   1750,
+   "Place one teaspoon in the insert"
+  ],
+  [
+   1800,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   1850,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   1900,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   1950,
+   "Place one fork in the insert"
+  ],
+  [
+   2000,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   2050,
+   "Place one fork in the insert"
+  ],
+  [
+   2100,
+   "Place one fork in the insert"
+  ],
+  [
+   2150,
+   "Place one teaspoon in the insert"
+  ],
+  [
+   2200,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   2250,
+   "Place one fork in the insert"
+  ],
+  [
+   2300,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   2350,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   2400,
+   "Place one fork in the insert"
+  ],
+  [
+   2450,
+   "Place one fork in the insert"
+  ],
+  [
+   2500,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   2550,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   2600,
+   "Place one dinner spoon in the insert"
+  ],
+  [
+   2650,
+   "Place one dinner spoon in the insert"
+  ],
+  [
+   2700,
+   "Place one fork in the insert"
+  ],
+  [
+   2750,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   2800,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   2850,
+   "Place one fork in the insert"
+  ],
+  [
+   2900,
+   "Place one fork in the insert"
+  ],
+  [
+   2950,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   3000,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   3050,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   3100,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   3150,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   3200,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   3250,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   3300,
+   "Place one fork in the insert"
+  ],
+  [
+   3350,
+   "Place one knife in the insert"
+  ],
+  [
+   3400,
+   "Place one teaspoon in the insert"
+  ],
+  [
+   3450,
+   "Place one knife in the insert"
+  ],
+  [
+   3500,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   3550,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   3600,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   3650,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   3700,
+   "Place one dinner spoon in the insert"
+  ],
+  [
+   3750,
+   "Place one dinner spoon in the insert"
+  ],
+  [
+   3800,
+   "Place one dinner spoon in the insert"
+  ],
+  [
+   3850,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   3900,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   3950,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   4000,
+   "Place one dinner spoon in the insert"
+  ],
+  [
+   4050,
+   "Place one teaspoon in the insert"
+  ],
+  [
+   4100,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   4150,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   4200,
+   "Place one teaspoon in the insert"
+  ],
+  [
+   4250,
+   "Place one fork in the insert"
+  ],
+  [
+   4300,
+   "Place one teaspoon in the insert"
+  ],
+  [
+   4350,
+   "Place one dinner spoon in the insert"
+  ],
+  [
+   4400,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   4450,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   4500,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   4550,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   4600,
+   "Place one teaspoon in the insert"
+  ],
+  [
+   4650,
+   "Place the wooden serving utensil in the "
+  ],
+  [
+   4700,
+   "Place one teaspoon in the insert"
+  ],
+  [
+   4750,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   4800,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   4850,
+   "Place the wooden serving utensil in the "
+  ],
+  [
+   4900,
+   "Place the wooden serving utensil in the "
+  ],
+  [
+   4950,
+   "Place one knife in the insert"
+  ],
+  [
+   5000,
+   "Place one knife in the insert"
+  ],
+  [
+   5050,
+   "Place one knife in the insert"
+  ],
+  [
+   5100,
+   "Place the wooden serving utensil in the "
+  ],
+  [
+   5150,
+   "Place the wooden serving utensil in the "
+  ],
+  [
+   5200,
+   "Place the wooden serving utensil in the "
+  ],
+  [
+   5250,
+   "Place the wooden serving utensil in the "
+  ],
+  [
+   5300,
+   "Place the wooden serving utensil in the "
+  ],
+  [
+   5350,
+   "Place the wooden serving utensil in the "
+  ],
+  [
+   5400,
+   "Place the wooden serving utensil in the "
+  ],
+  [
+   5450,
+   "Place the wooden serving utensil in the "
+  ],
+  [
+   5500,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   5550,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   5600,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   5650,
+   "Place one teaspoon in the insert"
+  ],
+  [
+   5700,
+   "Place the wooden serving utensil in the "
+  ],
+  [
+   5750,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   5800,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   5850,
+   "Place the wooden serving utensil in the "
+  ],
+  [
+   5900,
+   "Place one teaspoon in the insert"
+  ],
+  [
+   5950,
+   "Place the wooden serving utensil in the "
+  ],
+  [
+   6000,
+   "Place the wooden serving utensil in the "
+  ],
+  [
+   6050,
+   "Place the wooden serving utensil in the "
+  ],
+  [
+   6100,
+   "Place the wooden serving utensil in the "
+  ],
+  [
+   6150,
+   "Place the wooden serving utensil in the "
+  ],
+  [
+   6200,
+   "Place the wooden serving utensil in the "
+  ],
+  [
+   6250,
+   "Place the wooden serving utensil in the "
+  ],
+  [
+   6300,
+   "Place the wooden serving utensil in the "
+  ],
+  [
+   6350,
+   "Place the wooden serving utensil in the "
+  ],
+  [
+   6400,
+   "Place the wooden serving utensil in the "
+  ],
+  [
+   6450,
+   "Place the wooden serving utensil in the "
+  ],
+  [
+   6500,
+   "Place the wooden serving utensil in the "
+  ],
+  [
+   6550,
+   "Place the wooden serving utensil in the "
+  ],
+  [
+   6600,
+   "Place the wooden serving utensil in the "
+  ],
+  [
+   6650,
+   "Place the wooden serving utensil in the "
+  ],
+  [
+   6700,
+   "Place the wooden serving utensil in the "
+  ],
+  [
+   6750,
+   "Place the wooden serving utensil in the "
+  ],
+  [
+   6800,
+   "Place the wooden serving utensil in the "
+  ],
+  [
+   6850,
+   "Place the wooden serving utensil in the "
+  ],
+  [
+   6900,
+   "Place the wooden serving utensil in the "
+  ],
+  [
+   6950,
+   "Place the wooden serving utensil in the "
+  ],
+  [
+   7000,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   7050,
+   "Place the wooden serving utensil in the "
+  ],
+  [
+   7100,
+   "Place the wooden serving utensil in the "
+  ],
+  [
+   7150,
+   "Place the wooden serving utensil in the "
+  ],
+  [
+   7200,
+   "Place the wooden serving utensil in the "
+  ],
+  [
+   7250,
+   "Place the wooden serving utensil in the "
+  ],
+  [
+   7300,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   7350,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   7400,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   7450,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   7500,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   7550,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   7600,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   7650,
+   "Place one knife in the insert"
+  ],
+  [
+   7700,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   7750,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   7800,
+   "Place one teaspoon in the insert"
+  ],
+  [
+   7850,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   7900,
+   "Place the wooden serving utensil in the "
+  ],
+  [
+   7950,
+   "Place the wooden serving utensil in the "
+  ],
+  [
+   8000,
+   "Place the wooden serving utensil in the "
+  ],
+  [
+   8050,
+   "Place the wooden serving utensil in the "
+  ],
+  [
+   8100,
+   "Place one teaspoon in the insert"
+  ],
+  [
+   8150,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   8200,
+   "Place the wooden serving utensil in the "
+  ],
+  [
+   8250,
+   "Place the wooden serving utensil in the "
+  ],
+  [
+   8300,
+   "Place the wooden serving utensil in the "
+  ],
+  [
+   8350,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   8400,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   8450,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   8500,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   8550,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   8600,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   8650,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   8700,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   8750,
+   "Verify the finished task and hold the fi"
+  ],
+  [
+   8800,
+   "Verify the finished task and hold the fi"
+  ]
+ ],
+ "candidates": {
+  "0": [],
+  "46": [
+   "motion"
+  ],
+  "50": [
+   "grid"
+  ],
+  "100": [
+   "grid"
+  ],
+  "150": [
+   "grid"
+  ],
+  "197": [
+   "release"
+  ],
+  "200": [
+   "grid"
+  ],
+  "250": [
+   "grid"
+  ],
+  "257": [
+   "release"
+  ],
+  "300": [
+   "grid"
+  ],
+  "350": [
+   "grid"
+  ],
+  "400": [
+   "grid"
+  ],
+  "450": [
+   "grid"
+  ],
+  "500": [
+   "grid"
+  ],
+  "546": [
+   "release_miss"
+  ],
+  "550": [
+   "grid"
+  ],
+  "551": [
+   "motion"
+  ],
+  "570": [
+   "release_miss"
+  ],
+  "600": [
+   "grid"
+  ],
+  "611": [
+   "release_miss"
+  ],
+  "650": [
+   "grid"
+  ],
+  "700": [
+   "grid"
+  ],
+  "750": [
+   "grid"
+  ],
+  "800": [
+   "grid"
+  ],
+  "812": [
+   "motion"
+  ],
+  "850": [
+   "grid"
+  ],
+  "900": [
+   "grid"
+  ],
+  "948": [
+   "motion"
+  ],
+  "950": [
+   "grid"
+  ],
+  "966": [
+   "release"
+  ],
+  "1000": [
+   "grid"
+  ],
+  "1050": [
+   "grid"
+  ],
+  "1100": [
+   "grid"
+  ],
+  "1150": [
+   "grid"
+  ],
+  "1174": [
+   "motion"
+  ],
+  "1200": [
+   "grid"
+  ],
+  "1250": [
+   "grid"
+  ],
+  "1300": [
+   "grid"
+  ],
+  "1350": [
+   "grid"
+  ],
+  "1400": [
+   "grid"
+  ],
+  "1450": [
+   "grid"
+  ],
+  "1500": [
+   "grid"
+  ],
+  "1550": [
+   "grid"
+  ],
+  "1576": [
+   "motion"
+  ],
+  "1598": [
+   "motion"
+  ],
+  "1600": [
+   "grid"
+  ],
+  "1650": [
+   "grid"
+  ],
+  "1700": [
+   "grid"
+  ],
+  "1750": [
+   "grid"
+  ],
+  "1763": [
+   "motion"
+  ],
+  "1800": [
+   "grid"
+  ],
+  "1850": [
+   "grid"
+  ],
+  "1900": [
+   "grid"
+  ],
+  "1950": [
+   "grid"
+  ],
+  "2000": [
+   "grid"
+  ],
+  "2050": [
+   "grid"
+  ],
+  "2083": [
+   "release"
+  ],
+  "2086": [
+   "motion"
+  ],
+  "2100": [
+   "grid"
+  ],
+  "2150": [
+   "grid",
+   "motion"
+  ],
+  "2198": [
+   "motion"
+  ],
+  "2199": [
+   "motion"
+  ],
+  "2200": [
+   "grid"
+  ],
+  "2250": [
+   "grid"
+  ],
+  "2300": [
+   "grid"
+  ],
+  "2350": [
+   "grid"
+  ],
+  "2399": [
+   "release_miss"
+  ],
+  "2400": [
+   "grid"
+  ],
+  "2409": [
+   "motion"
+  ],
+  "2450": [
+   "grid"
+  ],
+  "2472": [
+   "release"
+  ],
+  "2498": [
+   "motion"
+  ],
+  "2500": [
+   "grid"
+  ],
+  "2548": [
+   "motion"
+  ],
+  "2550": [
+   "grid"
+  ],
+  "2600": [
+   "grid"
+  ],
+  "2607": [
+   "motion"
+  ],
+  "2650": [
+   "grid"
+  ],
+  "2655": [
+   "release"
+  ],
+  "2700": [
+   "grid"
+  ],
+  "2750": [
+   "grid"
+  ],
+  "2800": [
+   "grid"
+  ],
+  "2850": [
+   "grid"
+  ],
+  "2876": [
+   "motion"
+  ],
+  "2900": [
+   "grid"
+  ],
+  "2928": [
+   "release"
+  ],
+  "2950": [
+   "grid"
+  ],
+  "3000": [
+   "grid"
+  ],
+  "3050": [
+   "grid"
+  ],
+  "3100": [
+   "grid"
+  ],
+  "3150": [
+   "grid"
+  ],
+  "3200": [
+   "grid"
+  ],
+  "3248": [
+   "motion"
+  ],
+  "3250": [
+   "grid"
+  ],
+  "3300": [
+   "grid"
+  ],
+  "3321": [
+   "motion"
+  ],
+  "3350": [
+   "grid"
+  ],
+  "3357": [
+   "release"
+  ],
+  "3399": [
+   "motion"
+  ],
+  "3400": [
+   "grid"
+  ],
+  "3450": [
+   "grid"
+  ],
+  "3500": [
+   "grid"
+  ],
+  "3550": [
+   "grid"
+  ],
+  "3574": [
+   "motion"
+  ],
+  "3600": [
+   "grid"
+  ],
+  "3650": [
+   "grid"
+  ],
+  "3700": [
+   "grid"
+  ],
+  "3750": [
+   "grid"
+  ],
+  "3762": [
+   "motion"
+  ],
+  "3783": [
+   "release"
+  ],
+  "3800": [
+   "grid"
+  ],
+  "3850": [
+   "grid"
+  ],
+  "3900": [
+   "grid"
+  ],
+  "3950": [
+   "grid"
+  ],
+  "4000": [
+   "grid"
+  ],
+  "4050": [
+   "grid"
+  ],
+  "4100": [
+   "grid"
+  ],
+  "4149": [
+   "motion"
+  ],
+  "4150": [
+   "grid"
+  ],
+  "4200": [
+   "grid"
+  ],
+  "4250": [
+   "grid"
+  ],
+  "4284": [
+   "motion"
+  ],
+  "4300": [
+   "grid"
+  ],
+  "4348": [
+   "motion"
+  ],
+  "4350": [
+   "grid"
+  ],
+  "4398": [
+   "motion"
+  ],
+  "4400": [
+   "grid"
+  ],
+  "4450": [
+   "grid"
+  ],
+  "4498": [
+   "motion"
+  ],
+  "4500": [
+   "grid"
+  ],
+  "4550": [
+   "grid"
+  ],
+  "4551": [
+   "motion"
+  ],
+  "4585": [
+   "motion"
+  ],
+  "4600": [
+   "grid"
+  ],
+  "4627": [
+   "motion"
+  ],
+  "4650": [
+   "grid"
+  ],
+  "4671": [
+   "release"
+  ],
+  "4700": [
+   "grid"
+  ],
+  "4750": [
+   "grid"
+  ],
+  "4800": [
+   "grid"
+  ],
+  "4843": [
+   "motion",
+   "release_miss"
+  ],
+  "4850": [
+   "grid"
+  ],
+  "4872": [
+   "release_miss"
+  ],
+  "4900": [
+   "grid"
+  ],
+  "4929": [
+   "release_miss"
+  ],
+  "4933": [
+   "motion"
+  ],
+  "4950": [
+   "grid"
+  ],
+  "5000": [
+   "grid"
+  ],
+  "5048": [
+   "motion"
+  ],
+  "5050": [
+   "grid"
+  ],
+  "5057": [
+   "release_miss"
+  ],
+  "5100": [
+   "grid"
+  ],
+  "5144": [
+   "motion"
+  ],
+  "5150": [
+   "grid"
+  ],
+  "5200": [
+   "grid"
+  ],
+  "5250": [
+   "grid"
+  ],
+  "5298": [
+   "motion"
+  ],
+  "5300": [
+   "grid"
+  ],
+  "5350": [
+   "grid"
+  ],
+  "5400": [
+   "grid"
+  ],
+  "5450": [
+   "grid"
+  ],
+  "5458": [
+   "release"
+  ],
+  "5500": [
+   "grid"
+  ],
+  "5508": [
+   "motion"
+  ],
+  "5531": [
+   "motion"
+  ],
+  "5550": [
+   "grid"
+  ],
+  "5598": [
+   "motion"
+  ],
+  "5600": [
+   "grid"
+  ],
+  "5639": [
+   "motion"
+  ],
+  "5650": [
+   "grid"
+  ],
+  "5680": [
+   "motion"
+  ],
+  "5700": [
+   "grid"
+  ],
+  "5748": [
+   "motion"
+  ],
+  "5750": [
+   "grid"
+  ],
+  "5798": [
+   "motion"
+  ],
+  "5800": [
+   "grid"
+  ],
+  "5850": [
+   "grid"
+  ],
+  "5900": [
+   "grid"
+  ],
+  "5922": [
+   "motion"
+  ],
+  "5950": [
+   "grid"
+  ],
+  "6000": [
+   "grid"
+  ],
+  "6050": [
+   "grid"
+  ],
+  "6100": [
+   "grid"
+  ],
+  "6146": [
+   "motion"
+  ],
+  "6150": [
+   "grid"
+  ],
+  "6200": [
+   "grid"
+  ],
+  "6248": [
+   "motion"
+  ],
+  "6250": [
+   "grid"
+  ],
+  "6270": [
+   "motion"
+  ],
+  "6297": [
+   "motion"
+  ],
+  "6300": [
+   "grid"
+  ],
+  "6348": [
+   "motion"
+  ],
+  "6350": [
+   "grid"
+  ],
+  "6400": [
+   "grid"
+  ],
+  "6437": [
+   "motion"
+  ],
+  "6450": [
+   "grid"
+  ],
+  "6498": [
+   "motion"
+  ],
+  "6500": [
+   "grid"
+  ],
+  "6546": [
+   "motion"
+  ],
+  "6550": [
+   "grid"
+  ],
+  "6600": [
+   "grid"
+  ],
+  "6648": [
+   "motion"
+  ],
+  "6650": [
+   "grid"
+  ],
+  "6686": [
+   "release"
+  ],
+  "6688": [
+   "motion"
+  ],
+  "6700": [
+   "grid"
+  ],
+  "6750": [
+   "grid"
+  ],
+  "6800": [
+   "grid"
+  ],
+  "6850": [
+   "grid"
+  ],
+  "6900": [
+   "grid"
+  ],
+  "6950": [
+   "grid"
+  ],
+  "7000": [
+   "grid"
+  ],
+  "7050": [
+   "grid"
+  ],
+  "7100": [
+   "grid"
+  ],
+  "7150": [
+   "grid"
+  ],
+  "7199": [
+   "motion"
+  ],
+  "7200": [
+   "grid"
+  ],
+  "7236": [
+   "motion"
+  ],
+  "7250": [
+   "grid"
+  ],
+  "7257": [
+   "motion"
+  ],
+  "7283": [
+   "release"
+  ],
+  "7300": [
+   "grid"
+  ],
+  "7303": [
+   "release_miss"
+  ],
+  "7316": [
+   "motion"
+  ],
+  "7350": [
+   "grid"
+  ],
+  "7400": [
+   "grid"
+  ],
+  "7442": [
+   "release_miss"
+  ],
+  "7449": [
+   "motion"
+  ],
+  "7450": [
+   "grid"
+  ],
+  "7487": [
+   "motion"
+  ],
+  "7500": [
+   "grid"
+  ],
+  "7550": [
+   "grid"
+  ],
+  "7600": [
+   "grid"
+  ],
+  "7650": [
+   "grid"
+  ],
+  "7700": [
+   "grid"
+  ],
+  "7750": [
+   "grid"
+  ],
+  "7792": [
+   "motion"
+  ],
+  "7800": [
+   "grid"
+  ],
+  "7802": [
+   "release"
+  ],
+  "7819": [
+   "motion"
+  ],
+  "7850": [
+   "grid"
+  ],
+  "7871": [
+   "motion"
+  ],
+  "7900": [
+   "grid"
+  ],
+  "7950": [
+   "grid"
+  ],
+  "8000": [
+   "grid"
+  ],
+  "8003": [
+   "release"
+  ],
+  "8050": [
+   "grid"
+  ],
+  "8073": [
+   "release"
+  ],
+  "8100": [
+   "grid"
+  ],
+  "8101": [
+   "motion"
+  ],
+  "8115": [
+   "release"
+  ],
+  "8150": [
+   "grid"
+  ],
+  "8171": [
+   "motion"
+  ],
+  "8200": [
+   "grid"
+  ],
+  "8250": [
+   "grid"
+  ],
+  "8300": [
+   "grid"
+  ],
+  "8350": [
+   "grid"
+  ],
+  "8378": [
+   "release"
+  ],
+  "8393": [
+   "release"
+  ],
+  "8400": [
+   "grid"
+  ],
+  "8423": [
+   "release"
+  ],
+  "8450": [
+   "grid"
+  ],
+  "8500": [
+   "grid"
+  ],
+  "8550": [
+   "grid"
+  ],
+  "8600": [
+   "grid"
+  ],
+  "8650": [
+   "grid"
+  ],
+  "8700": [
+   "grid"
+  ],
+  "8749": [
+   "motion"
+  ],
+  "8750": [
+   "grid"
+  ],
+  "8800": [
+   "grid"
+  ],
+  "8850": [
+   "grid"
+  ],
+  "8885": [
+   "end"
+  ]
+ },
+ "segments": [
+  {
+   "row": "Place one dinner spoon in the insert",
+   "f0": 0,
+   "f1": 197,
+   "end_kind": [
+    "release"
+   ],
+   "vlm_score": 5.73,
+   "status": "ok",
+   "retry": []
+  },
+  {
+   "row": "Place one dinner spoon in the insert",
+   "f0": 197,
+   "f1": 1700,
+   "end_kind": [
+    "grid"
+   ],
+   "vlm_score": 55.38,
+   "status": "suboptimal",
+   "retry": [
+    "g1 576-605: missed grasp (p(lifted)=0.01)"
+   ]
+  },
+  {
+   "row": "Place one fork in the insert",
+   "f0": 1700,
+   "f1": 2083,
+   "end_kind": [
+    "release"
+   ],
+   "vlm_score": 28.25,
+   "status": "ok",
+   "retry": []
+  },
+  {
+   "row": "Place one fork in the insert",
+   "f0": 2083,
+   "f1": 3321,
+   "end_kind": [
+    "motion"
+   ],
+   "vlm_score": 65.55,
+   "status": "suboptimal",
+   "retry": [
+    "g1 2300-2409: missed grasp (p(lifted)=0.15)",
+    "g1 released at 2472, re-grasped at 2630 nearby"
+   ]
+  },
+  {
+   "row": "Place one knife in the insert",
+   "f0": 3321,
+   "f1": 3357,
+   "end_kind": [
+    "release"
+   ],
+   "vlm_score": 6.17,
+   "status": "ok",
+   "retry": []
+  },
+  {
+   "row": "Place one knife in the insert",
+   "f0": 3357,
+   "f1": 3783,
+   "end_kind": [
+    "release"
+   ],
+   "vlm_score": 20.01,
+   "status": "ok",
+   "retry": []
+  },
+  {
+   "row": "Place one teaspoon in the insert",
+   "f0": 3783,
+   "f1": 4671,
+   "end_kind": [
+    "release"
+   ],
+   "vlm_score": 44.51,
+   "status": "ok",
+   "retry": []
+  },
+  {
+   "row": "Place one teaspoon in the insert",
+   "f0": 4671,
+   "f1": 4843,
+   "end_kind": [
+    "motion",
+    "release_miss"
+   ],
+   "vlm_score": 10.4,
+   "status": "ok",
+   "retry": [
+    "g1 4765-4839: missed grasp (p(lifted)=0.05)"
+   ]
+  },
+  {
+   "row": "Place the wooden serving utensil in the insert",
+   "f0": 4843,
+   "f1": 8003,
+   "end_kind": [
+    "release"
+   ],
+   "vlm_score": 226.84,
+   "status": "suboptimal",
+   "retry": [
+    "g1 4886-4933: missed grasp (p(lifted)=0.08)",
+    "g1 4976-5050: missed grasp (p(lifted)=0.08)",
+    "g0 7334-7448: missed grasp (p(lifted)=0.10)"
+   ]
+  },
+  {
+   "row": "Slide the loaded insert to the right-side finished zone",
+   "f0": 8003,
+   "f1": 8300,
+   "end_kind": [
+    "grid"
+   ],
+   "vlm_score": 11.52,
+   "status": "ok",
+   "retry": []
+  },
+  {
+   "row": "Verify the finished task and hold the final arm positions",
+   "f0": 8300,
+   "f1": 8885,
+   "end_kind": [
+    "end"
+   ],
+   "vlm_score": 41.45,
+   "status": "ok",
+   "retry": []
+  }
+ ],
+ "skipped_slots": [],
+ "episodes": [
+  {
+   "gripper": 0,
+   "c0": 164,
+   "c1": 273,
+   "onset": 257,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 67.60177512462228,
+   "ap_med": 0.13709764733992036,
+   "failed": false,
+   "depart": null,
+   "uncertain": false,
+   "t_onset": 5.14
+  },
+  {
+   "gripper": 1,
+   "c0": 175,
+   "c1": 190,
+   "onset": 197,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 96.52072316347407,
+   "ap_med": 0.0483849168806596,
+   "failed": false,
+   "depart": null,
+   "uncertain": true,
+   "t_onset": 3.94
+  },
+  {
+   "gripper": 1,
+   "c0": 528,
+   "c1": 541,
+   "onset": 546,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 3.0413812651491097,
+   "ap_med": 0.2197143168683895,
+   "failed": true,
+   "depart": null,
+   "uncertain": false,
+   "t_onset": 10.92
+  },
+  {
+   "gripper": 1,
+   "c0": 551,
+   "c1": 567,
+   "onset": 570,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 35.503520952153465,
+   "ap_med": 0.07799603974637853,
+   "failed": true,
+   "depart": null,
+   "uncertain": false,
+   "t_onset": 11.4
+  },
+  {
+   "gripper": 1,
+   "c0": 576,
+   "c1": 605,
+   "onset": 611,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 34.532593299664015,
+   "ap_med": 0.1384604295279197,
+   "failed": true,
+   "depart": null,
+   "uncertain": false,
+   "t_onset": 12.22
+  },
+  {
+   "gripper": 1,
+   "c0": 750,
+   "c1": 1003,
+   "onset": 966,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 98.95706139533449,
+   "ap_med": 0.06630721578524723,
+   "failed": false,
+   "depart": null,
+   "uncertain": false,
+   "t_onset": 19.32
+  },
+  {
+   "gripper": 1,
+   "c0": 2069,
+   "c1": 2079,
+   "onset": 2083,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 4.6097722286464435,
+   "ap_med": 0.3297117670773035,
+   "failed": false,
+   "depart": null,
+   "uncertain": false,
+   "t_onset": 41.66
+  },
+  {
+   "gripper": 1,
+   "c0": 2300,
+   "c1": 2409,
+   "onset": 2399,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 2.0615528128088303,
+   "ap_med": 0.03848852360428989,
+   "failed": true,
+   "depart": null,
+   "uncertain": false,
+   "t_onset": 47.98
+  },
+  {
+   "gripper": 1,
+   "c0": 2414,
+   "c1": 2472,
+   "onset": 2472,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 190.00065789359783,
+   "ap_med": 0.03186179561307495,
+   "failed": false,
+   "depart": null,
+   "uncertain": false,
+   "t_onset": 49.44
+  },
+  {
+   "gripper": 1,
+   "c0": 2630,
+   "c1": 2657,
+   "onset": 2655,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 54.60082416960389,
+   "ap_med": 0.11080000000000001,
+   "failed": false,
+   "depart": null,
+   "uncertain": false,
+   "t_onset": 53.1
+  },
+  {
+   "gripper": 1,
+   "c0": 2878,
+   "c1": 2932,
+   "onset": 2928,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 225.62468836543576,
+   "ap_med": 0.044793273038883086,
+   "failed": false,
+   "depart": null,
+   "uncertain": false,
+   "t_onset": 58.56
+  },
+  {
+   "gripper": 1,
+   "c0": 2939,
+   "c1": 3359,
+   "onset": 3357,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 66.34945365261119,
+   "ap_med": 0.014050000000000007,
+   "failed": false,
+   "depart": null,
+   "uncertain": false,
+   "t_onset": 67.14
+  },
+  {
+   "gripper": 1,
+   "c0": 3598,
+   "c1": 3784,
+   "onset": 3783,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 46.93080012102926,
+   "ap_med": 0.22379419547571683,
+   "failed": false,
+   "depart": null,
+   "uncertain": false,
+   "t_onset": 75.66
+  },
+  {
+   "gripper": 1,
+   "c0": 4400,
+   "c1": 4667,
+   "onset": 4671,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 182.58422713914803,
+   "ap_med": 0.010700000000000043,
+   "failed": false,
+   "depart": null,
+   "uncertain": false,
+   "t_onset": 93.42
+  },
+  {
+   "gripper": 1,
+   "c0": 4765,
+   "c1": 4839,
+   "onset": 4843,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 15.20690632574555,
+   "ap_med": 0.0061512302460491886,
+   "failed": true,
+   "depart": null,
+   "uncertain": false,
+   "t_onset": 96.86
+  },
+  {
+   "gripper": 1,
+   "c0": 4856,
+   "c1": 4868,
+   "onset": 4872,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 47.18315377335432,
+   "ap_med": 0.0622095116092925,
+   "failed": true,
+   "depart": null,
+   "uncertain": false,
+   "t_onset": 97.44
+  },
+  {
+   "gripper": 1,
+   "c0": 4886,
+   "c1": 4933,
+   "onset": 4929,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 50.172203459684724,
+   "ap_med": 0.20923015316848526,
+   "failed": true,
+   "depart": null,
+   "uncertain": false,
+   "t_onset": 98.58
+  },
+  {
+   "gripper": 1,
+   "c0": 4976,
+   "c1": 5050,
+   "onset": 5057,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 10.594810050208546,
+   "ap_med": 0.14130701570157012,
+   "failed": true,
+   "depart": null,
+   "uncertain": false,
+   "t_onset": 101.14
+  },
+  {
+   "gripper": 1,
+   "c0": 5100,
+   "c1": 5464,
+   "onset": 5458,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 41.862871377868956,
+   "ap_med": 0.009400480048004811,
+   "failed": false,
+   "depart": null,
+   "uncertain": false,
+   "t_onset": 109.16
+  },
+  {
+   "gripper": 1,
+   "c0": 6601,
+   "c1": 6692,
+   "onset": 6686,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 84.4289642243703,
+   "ap_med": 0.15567523625647806,
+   "failed": false,
+   "depart": null,
+   "uncertain": false,
+   "t_onset": 133.72
+  },
+  {
+   "gripper": 0,
+   "c0": 7269,
+   "c1": 7281,
+   "onset": 7283,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 63.105071111599266,
+   "ap_med": 0.21881267549137584,
+   "failed": false,
+   "depart": null,
+   "uncertain": false,
+   "t_onset": 145.66
+  },
+  {
+   "gripper": 0,
+   "c0": 7288,
+   "c1": 7304,
+   "onset": 7303,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 22.561028345356956,
+   "ap_med": 0.28046402640264023,
+   "failed": true,
+   "depart": null,
+   "uncertain": false,
+   "t_onset": 146.06
+  },
+  {
+   "gripper": 0,
+   "c0": 7334,
+   "c1": 7448,
+   "onset": 7442,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 34.92849839314596,
+   "ap_med": 0.15154999999999996,
+   "failed": true,
+   "depart": null,
+   "uncertain": false,
+   "t_onset": 148.84
+  },
+  {
+   "gripper": 0,
+   "c0": 7510,
+   "c1": 7802,
+   "onset": 7802,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 80.06247560499239,
+   "ap_med": 0.06680000000000003,
+   "failed": false,
+   "depart": null,
+   "uncertain": false,
+   "t_onset": 156.04
+  },
+  {
+   "gripper": 1,
+   "c0": 7919,
+   "c1": 8016,
+   "onset": 8003,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 94.36630754670864,
+   "ap_med": 0.1634712411705348,
+   "failed": false,
+   "depart": null,
+   "uncertain": false,
+   "t_onset": 160.06
+  },
+  {
+   "gripper": 0,
+   "c0": 7982,
+   "c1": 8156,
+   "onset": 8115,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 16.62077013859466,
+   "ap_med": 0.14864323620706915,
+   "failed": false,
+   "depart": null,
+   "uncertain": false,
+   "t_onset": 162.3
+  },
+  {
+   "gripper": 1,
+   "c0": 8044,
+   "c1": 8072,
+   "onset": 8073,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 35.92005011132362,
+   "ap_med": 0.14343312166112288,
+   "failed": false,
+   "depart": null,
+   "uncertain": false,
+   "t_onset": 161.46
+  },
+  {
+   "gripper": 0,
+   "c0": 8247,
+   "c1": 8373,
+   "onset": 8378,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 294.28090322003567,
+   "ap_med": 0.19618825647388188,
+   "failed": false,
+   "depart": null,
+   "uncertain": false,
+   "t_onset": 167.56
+  },
+  {
+   "gripper": 0,
+   "c0": 8378,
+   "c1": 8387,
+   "onset": 8393,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 61.98790204547981,
+   "ap_med": 0.22144358794674135,
+   "failed": false,
+   "depart": null,
+   "uncertain": false,
+   "t_onset": 167.86
+  },
+  {
+   "gripper": 0,
+   "c0": 8409,
+   "c1": 8422,
+   "onset": 8423,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 20.554804791094465,
+   "ap_med": 0.26517123973562984,
+   "failed": false,
+   "depart": null,
+   "uncertain": false,
+   "t_onset": 168.46
+  }
+ ],
+ "issues": [
+  "[4] seq 2 ends at 34.0s with no gripper opening within 0.5 s",
+  "[4] seq 4 ends at 66.42s with no gripper opening within 0.5 s",
+  "[4] seq 10 ends at 166.0s with no gripper opening within 0.5 s",
+  "[5] missed grasp at 95.30s (gripper 1) inside seq 8 marked ok (is it a retry, or a hold/press?)",
+  "[occluded] gripper 1 not visible before its release at 3.94s; boundary there is an upper bound"
+ ]
+}

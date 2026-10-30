@@ -1,0 +1,267 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Gripper timeline</title>
+<style>
+:root{--bg:#16181c;--panel:#1f2228;--line:#2e323a;--text:#e6e6e6;--mute:#8b919c;
+      --open:#2ecc71;--closed:#e74c3c;--unknown:#f1c40f;--none:#3a3f48;--sel:#c48bff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:13px/1.4 system-ui,sans-serif;display:flex;flex-direction:column;height:100vh;overflow:hidden}
+#bar{padding:6px 10px;border-bottom:1px solid var(--line);display:flex;gap:12px;align-items:center;flex-wrap:wrap;background:var(--panel)}
+select,button{background:var(--bg);color:var(--text);border:1px solid var(--line);padding:3px 6px;border-radius:4px}
+#views{flex:1;display:flex;gap:10px;padding:10px;min-height:0}
+#cropbox{display:flex;flex-direction:column;align-items:center;gap:6px}
+#crop{width:420px;height:420px;background:#000;image-rendering:auto;border:3px solid var(--none)}
+#state{font-size:22px;font-weight:700}
+#ctx{flex:1;min-width:0;display:flex;align-items:flex-start;justify-content:center}
+#ctx img{max-width:100%;max-height:100%;object-fit:contain;background:#000}
+#tlwrap{padding:6px 10px 10px;border-top:1px solid var(--line)}
+#tl{width:100%;height:120px;display:block;cursor:pointer}
+#info{font-family:ui-monospace,monospace;color:var(--mute);margin-top:4px}
+#msg{color:var(--sel);font-weight:600}
+#help{position:absolute;right:10px;top:48px;background:#000d;padding:10px 12px;border-radius:6px;font-size:12px;max-width:470px;display:none;z-index:5}
+kbd{background:#333;border-radius:3px;padding:0 4px;font-family:ui-monospace,monospace}
+.lg{display:inline-block;width:10px;height:10px;border-radius:2px;margin:0 3px 0 8px;vertical-align:middle}
+</style></head>
+<body>
+<div id="bar">
+  <b>Timeline</b>
+  <select id="unitSel"></select>
+  <button id="prevU">◀ P</button><button id="nextU">N ▶</button>
+  <label><input type="checkbox" id="onlyTodo" checked> todo only</label>
+  <span id="prog" style="color:var(--mute)"></span>
+  <span id="msg"></span>
+  <span style="margin-left:auto"><a href="/" style="color:var(--mute)">box tool</a> · press <kbd>H</kbd></span>
+</div>
+<div id="help">
+  <b>Mark the frame where the state CHANGES</b> — the state then holds until the next change point.<br>
+  <kbd>1</kbd> open <kbd>2</kbd> closed <kbd>3</kbd> unknown: set a change point at the cursor<br>
+  <kbd>Del</kbd>/<kbd>Backspace</kbd> remove the change point that sets the current state<br>
+  <kbd>C</kbd> remove all model (striped) change points of this unit — start from scratch when the guess is noisy<br>
+  <kbd>←</kbd>/<kbd>→</kbd> ±1 frame, with <kbd>Shift</kbd> ±10, <kbd>Home</kbd>/<kbd>End</kbd> start/end<br>
+  <kbd>Space</kbd> play/pause, <kbd>+</kbd>/<kbd>-</kbd> speed · click / drag the timeline to seek · wheel on timeline: zoom<br>
+  <kbd>[</kbd>/<kbd>]</kbd> previous/next change point, <kbd>{</kbd>/<kbd>}</kbd> previous/next tracker flag<br>
+  <kbd>B</kbd> start/end a BAD-BOX range (crop does not show this gripper → not used for training);
+  <kbd>Shift</kbd>+<kbd>B</kbd> remove the bad range under the cursor<br>
+  <kbd>A</kbd> add this frame as an ANCHOR (opens the box tool to fix the boxes; then re-run gripper.track)<br>
+  <kbd>Enter</kbd> unit done → next · <kbd>N</kbd>/<kbd>P</kbd> next/previous unit<br>
+  <b>Rule</b>: open = fingers apart / opening and not holding anything; closed = fingers together or
+  clamped on an object; unknown = fingers hidden/blurred.
+  closed→open: put the change point on the FIRST frame the fingers START to separate (the release
+  moment of the spec, not when the gap is already wide - step back frame by frame).
+  open→closed: the frame the fingers touch each other or the object. Striped band = model guess (accept it by leaving it,
+  edits turn into yours; Enter makes everything yours).
+</div>
+<div id="views">
+  <div id="cropbox"><img id="crop" alt=""><div id="state">-</div></div>
+  <div id="ctx"><img id="ctxImg" alt=""></div>
+</div>
+<div id="tlwrap"><canvas id="tl"></canvas>
+  <div id="info"></div>
+  <div style="color:var(--mute);font-size:12px">
+    <span class="lg" style="background:var(--open)"></span>open<span class="lg" style="background:var(--closed)"></span>closed
+    <span class="lg" style="background:var(--unknown)"></span>unknown<span class="lg" style="background:#000;border:1px solid #888"></span>bad box
+    · row 1 = labels (striped = model guess) · row 2 = model p_open · ▲ anchor · red tick = tracker flag · grey = no track box
+  </div>
+</div>
+<script>
+const COL = {gripper_open:'#2ecc71', gripper_closed:'#e74c3c', gripper_unknown:'#f1c40f'};
+const KEYCLS = {'1':'gripper_open','2':'gripper_closed','3':'gripper_unknown'};
+const $ = id => document.getElementById(id);
+const api = (url, body) => fetch(url, body ? {method:'POST', headers:{'Content-Type':'application/json'},
+  body: JSON.stringify(body)} : {}).then(r => r.ok ? r.json() : r.json().then(e => Promise.reject(e.error)));
+const msg = t => { $('msg').textContent = t; clearTimeout(msg.t); msg.t = setTimeout(() => $('msg').textContent = '', 3000); };
+
+let units = [], U = null, cur = 0, view = [0, 1], dirty = false, playing = false, fpsPlay = 15, badStart = null;
+const cache = new Map();   // frame -> Image
+const tl = $('tl'), tctx = tl.getContext('2d');
+
+// ---------------- units
+async function loadUnits(){
+  units = await api('/api/units');
+  const sel = $('unitSel'), only = $('onlyTodo').checked;
+  sel.innerHTML = '';
+  units.forEach((u, k) => {
+    if (only && u.done && !(U && U.key === u.key)) return;
+    const o = document.createElement('option'); o.value = k;
+    o.textContent = `${u.done ? '✓' : '·'} ${u.key}  (${u.tracked}/${u.b - u.a + 1} tracked${u.flags ? ', ' + u.flags + ' flags' : ''})`;
+    sel.appendChild(o);
+  });
+  if (U) sel.value = units.findIndex(u => u.key === U.key);
+  $('prog').textContent = `${units.filter(u => u.done).length}/${units.length} units done`;
+}
+async function openUnit(k){
+  if (k < 0 || k >= units.length) return;
+  await save();
+  U = await api('/api/unit?key=' + encodeURIComponent(units[k].key));
+  U.frames = Object.fromEntries(Object.entries(U.frames).map(([f, v]) => [+f, v]));
+  if (U.pred) U.pred = Object.fromEntries(Object.entries(U.pred).map(([f, v]) => [+f, v]));
+  cache.clear(); badStart = null; stop();
+  const firstTracked = Object.keys(U.frames).map(Number).sort((a, b) => a - b)[0];
+  cur = firstTracked ?? U.a; view = [U.a, U.b];
+  $('unitSel').value = k; seek(cur);
+  if (U.changes.length && U.changes.every(c => c[2] === 'model')) msg('model pre-labels loaded: check them, then Enter');
+}
+const idx = () => units.findIndex(u => u.key === U.key);
+function nextUnit(dir = 1, todoOnly = false){
+  for (let j = 1; j <= units.length; j++){
+    const m = idx() + dir * j; if (m < 0 || m >= units.length) break;
+    if (!todoOnly || !units[m].done) return openUnit(m);
+  }
+  msg('no more units');
+}
+
+// ---------------- labels
+function stateAt(f){ let s = null; for (const c of U.changes){ if (c[0] <= f) s = c[1]; else break; } return s; }
+function changeIndexAt(f){ let k = -1; U.changes.forEach((c, i) => { if (c[0] <= f) k = i; }); return k; }
+function setChange(f, cls){
+  U.changes = U.changes.filter(c => c[0] !== f); U.changes.push([f, cls, 'human']);
+  U.changes.sort((a, b) => a[0] - b[0]);
+  U.changes = U.changes.filter((c, i, arr) => i === 0 || arr[i - 1][1] !== c[1]);   // no repeats
+  dirty = true; draw();
+}
+function isBad(f){ return U.bad.some(([a, b]) => f >= a && f <= b); }
+async function save(done){
+  if (!U || (!dirty && done === undefined)) return;
+  dirty = false;
+  try {
+    const r = await api('/api/unit', {key: U.key, changes: U.changes, bad: U.bad, done: done ?? U.done});
+    U.changes = r.changes; U.done = r.done;
+    const u = units.find(x => x.key === U.key); if (u){ u.done = r.done; u.changes = r.changes.length; }
+  } catch(e){ dirty = true; msg('SAVE FAILED: ' + e); throw e; }
+}
+setInterval(() => { if (dirty) save(); }, 1500);
+window.addEventListener('beforeunload', e => { if (dirty){ e.preventDefault(); e.returnValue = ''; } });
+
+// ---------------- images
+const cropUrl = f => `/crop?stem=${encodeURIComponent(U.stem)}&side=${U.side}&f=${f}`;
+function getImg(f){
+  if (!U.frames[f]) return null;
+  if (!cache.has(f)){ const im = new Image(); im.src = cropUrl(f); cache.set(f, im);
+    if (cache.size > 900){ const k = cache.keys().next().value; cache.delete(k); } }
+  return cache.get(f);
+}
+function preload(){ for (let f = cur + 1; f <= Math.min(U.b, cur + 40); f++) getImg(f); for (let f = cur - 1; f >= Math.max(U.a, cur - 10); f--) getImg(f); }
+let ctxT = null;
+function seek(f){
+  if (!U) return;
+  cur = Math.max(U.a, Math.min(U.b, f));
+  const im = getImg(cur), el = $('crop');
+  if (im){ if (im.complete) el.src = im.src; else im.onload = () => { if (cur === f) el.src = im.src; }; } else el.removeAttribute('src');
+  const s = stateAt(cur);
+  el.style.borderColor = isBad(cur) ? '#000' : (s ? COL[s] : 'var(--none)');
+  $('state').textContent = (s ? s.replace('gripper_', '') : 'unlabelled') + (isBad(cur) ? '  (bad box)' : '') + (U.frames[cur] ? '' : '  — no track box');
+  $('state').style.color = s ? COL[s] : 'var(--mute)';
+  const p = U.pred && U.pred[cur], box = U.frames[cur];
+  const po = p ? (p[2] > Math.max(p[0], p[1]) ? 'unknown' : (p[0] / (p[0] + p[1] + 1e-6)).toFixed(2)) : '-';
+  const flag = U.flags.find(x => x[0] === cur);
+  $('info').textContent = `${U.video}  side ${U.side}  frame ${cur}  t=${(cur / U.fps).toFixed(3)}s  ` +
+    `| model p_open=${po}${U.pred_model ? ' (' + U.pred_model + ')' : ''}  | box score ${box ? box[4] : '-'}` +
+    (box && box[5] === 2 ? '  | FILLED (no mask, last box carried over)' : box && box[5] === 1 ? '  | SUSPECT box' : '') +
+    (U.anchors.includes(cur) ? '  | ANCHOR' : '') + (flag ? '  | FLAG: ' + flag[2] : '') +
+    (badStart !== null ? `  | bad range from ${badStart}…` : '') + (U.done ? '  | ✓ done' : '');
+  preload(); draw();
+  clearTimeout(ctxT);
+  if (!playing) ctxT = setTimeout(() => { $('ctxImg').src = `/ctx?stem=${encodeURIComponent(U.stem)}&side=${U.side}&f=${cur}`; }, 180);
+}
+
+// ---------------- timeline
+const X = f => (f - view[0]) / Math.max(1, view[1] - view[0] + 1) * tl.width;
+const F = x => Math.round(view[0] + x / tl.width * (view[1] - view[0] + 1));
+function draw(){
+  if (!U) return;
+  const dpr = window.devicePixelRatio || 1, W = tl.clientWidth, H = 120;
+  if (tl.width !== W * dpr){ tl.width = W * dpr; tl.height = H * dpr; }
+  const c = tctx; c.setTransform(1, 0, 0, 1, 0, 0); c.clearRect(0, 0, tl.width, tl.height);
+  c.scale(dpr, dpr); const sx = f => X(f) / dpr, w1 = Math.max(1, W / (view[1] - view[0] + 1));
+  const R1 = [16, 30], R2 = [52, 40];
+  c.fillStyle = '#2a2e36'; c.fillRect(0, R1[0], W, R1[1]); c.fillRect(0, R2[0], W, R2[1]);
+  // row 1: labels
+  const model = U.changes.length && U.changes.every(x => x[2] === 'model');
+  for (let k = 0; k < U.changes.length; k++){
+    const [f0, cls, by] = U.changes[k], f1 = k + 1 < U.changes.length ? U.changes[k + 1][0] : U.b + 1;
+    c.fillStyle = COL[cls]; c.globalAlpha = by === 'model' ? 0.45 : 1;
+    c.fillRect(sx(f0), R1[0], sx(f1) - sx(f0), R1[1]);
+    if (by === 'model'){ c.globalAlpha = 0.35; c.strokeStyle = '#000';
+      for (let x = sx(f0); x < sx(f1); x += 8){ c.beginPath(); c.moveTo(x, R1[0] + R1[1]); c.lineTo(x + 8, R1[0]); c.stroke(); } }
+    c.globalAlpha = 1;
+  }
+  // frames without a track box, bad ranges
+  for (let f = view[0]; f <= view[1]; f++) if (!U.frames[f]){ c.fillStyle = '#555'; c.fillRect(sx(f), R1[0] + R1[1] - 5, w1, 5); }
+  for (const [a, b] of U.bad){ c.fillStyle = '#000'; c.fillRect(sx(a), R1[0], sx(b + 1) - sx(a), R1[1]);
+    c.strokeStyle = '#888'; c.strokeRect(sx(a), R1[0], sx(b + 1) - sx(a), R1[1]); }
+  if (badStart !== null){ c.fillStyle = '#0008'; c.fillRect(sx(Math.min(badStart, cur)), R1[0], sx(Math.max(badStart, cur) + 1) - sx(Math.min(badStart, cur)), R1[1]); }
+  // row 2: model
+  if (U.pred){
+    for (let f = view[0]; f <= view[1]; f++){ const p = U.pred[f]; if (!p) continue;
+      const k = p.indexOf(Math.max(...p)); c.fillStyle = COL[['gripper_open', 'gripper_closed', 'gripper_unknown'][k]];
+      c.globalAlpha = 0.35; c.fillRect(sx(f), R2[0], w1, R2[1]); c.globalAlpha = 1; }
+    c.strokeStyle = '#fff'; c.lineWidth = 1.2; c.beginPath(); let on = false;
+    for (let f = view[0]; f <= view[1]; f++){ const p = U.pred[f]; if (!p || p[2] > Math.max(p[0], p[1])){ on = false; continue; }
+      const y = R2[0] + R2[1] * (1 - p[0] / (p[0] + p[1] + 1e-6));
+      if (on) c.lineTo(sx(f) + w1 / 2, y); else c.moveTo(sx(f) + w1 / 2, y); on = true; }
+    c.stroke();
+  } else { c.fillStyle = '#8b919c'; c.font = '11px system-ui'; c.fillText('no model prediction yet (python -m gripper.state predict)', 6, R2[0] + 24); }
+  // anchors, flags, change ticks, axis, cursor
+  c.fillStyle = '#fff'; for (const f of U.anchors){ const x = sx(f); c.beginPath(); c.moveTo(x, 14); c.lineTo(x - 5, 4); c.lineTo(x + 5, 4); c.fill(); }
+  c.fillStyle = '#ff4d4d'; for (const [f] of U.flags) c.fillRect(sx(f), 0, 2, 12);
+  c.fillStyle = '#fff'; for (const [f] of U.changes) c.fillRect(sx(f), R1[0], 1, R1[1]);
+  c.fillStyle = '#8b919c'; c.font = '11px system-ui';
+  const step = Math.pow(10, Math.ceil(Math.log10((view[1] - view[0]) / 10 + 1)));
+  for (let f = Math.ceil(view[0] / step) * step; f <= view[1]; f += step){ c.fillRect(sx(f), 94, 1, 6); c.fillText(f, sx(f) + 2, 112); }
+  c.fillStyle = '#c48bff'; c.fillRect(sx(cur), 0, Math.max(2, w1), 100);
+}
+let dragging = false;
+tl.addEventListener('mousedown', e => { dragging = true; seek(F(e.offsetX * (window.devicePixelRatio || 1))); });
+window.addEventListener('mousemove', e => { if (dragging){ const r = tl.getBoundingClientRect(); seek(F((e.clientX - r.left) * (window.devicePixelRatio || 1))); } });
+window.addEventListener('mouseup', () => dragging = false);
+tl.addEventListener('wheel', e => { e.preventDefault(); if (!U) return;
+  const f = F(e.offsetX * (window.devicePixelRatio || 1)), span = view[1] - view[0] + 1;
+  const ns = Math.max(30, Math.min(U.b - U.a + 1, Math.round(span * Math.exp(e.deltaY * 0.002))));
+  let a = Math.round(f - (f - view[0]) / span * ns); a = Math.max(U.a, Math.min(U.b - ns + 1, a));
+  view = [a, a + ns - 1]; draw(); }, {passive: false});
+function follow(){ const span = view[1] - view[0]; if (cur < view[0] || cur > view[1]){ let a = Math.max(U.a, Math.min(U.b - span, cur - Math.round(span / 3))); view = [a, a + span]; } }
+
+// ---------------- playback
+let timer = null;
+function play(){ playing = true; timer = setInterval(() => { if (cur >= U.b){ stop(); return; } seek(cur + 1); follow(); }, 1000 / fpsPlay); }
+function stop(){ playing = false; clearInterval(timer); if (U) seek(cur); }
+
+// ---------------- keys
+window.addEventListener('keydown', e => {
+  if (!U || e.target.tagName === 'SELECT' || e.ctrlKey || e.metaKey || e.altKey) return;
+  const k = e.key;
+  if (k === ' '){ e.preventDefault(); playing ? stop() : play(); return; }
+  if (KEYCLS[k]){ setChange(cur, KEYCLS[k]); seek(cur); return; }
+  if (k === 'ArrowRight' || k === 'ArrowLeft'){ e.preventDefault(); seek(cur + (k === 'ArrowRight' ? 1 : -1) * (e.shiftKey ? 10 : 1)); follow(); return; }
+  if (k === 'Home'){ seek(U.a); follow(); return; } if (k === 'End'){ seek(U.b); follow(); return; }
+  if (k === 'c' || k === 'C'){ const n = U.changes.length; U.changes = U.changes.filter(c => c[2] !== 'model');
+    if (U.changes.length !== n){ dirty = true; msg(`removed ${n - U.changes.length} model change points`); seek(cur); } return; }
+  if (k === 'Delete' || k === 'Backspace'){ e.preventDefault(); const i = changeIndexAt(cur);
+    if (i >= 0){ U.changes.splice(i, 1); dirty = true; seek(cur); } return; }
+  if (k === ']' || k === '['){ const fs = U.changes.map(c => c[0]);
+    const t = k === ']' ? fs.find(f => f > cur) : [...fs].reverse().find(f => f < cur); if (t !== undefined){ seek(t); follow(); } return; }
+  if (k === '}' || k === '{'){ const fs = U.flags.map(c => c[0]);
+    const t = k === '}' ? fs.find(f => f > cur) : [...fs].reverse().find(f => f < cur); if (t !== undefined){ seek(t); follow(); } return; }
+  if (k === 'b'){ if (badStart === null){ badStart = cur; msg('bad range: move to its last frame and press B again'); }
+    else { U.bad.push([Math.min(badStart, cur), Math.max(badStart, cur)]); badStart = null; dirty = true; } seek(cur); return; }
+  if (k === 'B'){ const n = U.bad.length; U.bad = U.bad.filter(([a, b]) => !(cur >= a && cur <= b));
+    if (U.bad.length !== n){ dirty = true; seek(cur); } return; }
+  if (k === 'a' || k === 'A'){ api('/api/anchor', {stem: U.stem, frame: cur}).then(it => {
+      window.open('/#' + encodeURIComponent(it.id), 'boxtool'); msg(`anchor ${it.id} added: fix its boxes, Enter, then re-run gripper.track`); })
+      .catch(e => msg('anchor failed: ' + e)); return; }
+  if (k === 'Enter'){ e.preventDefault(); save(true).then(() => { msg('unit done'); loadUnits(); nextUnit(1, true); }); return; }
+  if (k === 'n' || k === 'N'){ nextUnit(1); return; } if (k === 'p' || k === 'P'){ nextUnit(-1); return; }
+  if (k === '+' || k === '='){ fpsPlay = Math.min(50, fpsPlay + 5); msg(`play ${fpsPlay} fps`); if (playing){ stop(); play(); } return; }
+  if (k === '-'){ fpsPlay = Math.max(5, fpsPlay - 5); msg(`play ${fpsPlay} fps`); if (playing){ stop(); play(); } return; }
+  if (k === 'h' || k === 'H'){ const h = $('help'); h.style.display = h.style.display === 'block' ? 'none' : 'block'; }
+});
+$('unitSel').onchange = e => openUnit(+e.target.value);
+$('prevU').onclick = () => nextUnit(-1); $('nextU').onclick = () => nextUnit(1);
+$('onlyTodo').onchange = loadUnits;
+window.addEventListener('resize', draw);
+
+loadUnits().then(() => {
+  if (!units.length){ $('info').textContent = 'no tracked units yet: run python -m gripper.track segments'; return; }
+  const k = units.findIndex(u => !u.done); openUnit(k >= 0 ? k : 0);
+});
+</script>
+</body></html>

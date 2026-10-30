@@ -1,0 +1,1059 @@
+{
+ "fps": 50.0,
+ "T": 2484,
+ "onset_shift": -7,
+ "dp_cost": -176.07009166666663,
+ "vlm_counts": {},
+ "vlm_conditions": {
+  "Pull the folded towel aside to clear space": 0.0032,
+  "Drag the pile next to the folded towel": 0.0032,
+  "Lift the folded towel onto the pile": 0.0032
+ },
+ "vlm_top_row_per_clip": [
+  [
+   50,
+   "Move one towel from the left pile to the"
+  ],
+  [
+   100,
+   "Move one towel from the left pile to the"
+  ],
+  [
+   150,
+   "Move one towel from the left pile to the"
+  ],
+  [
+   200,
+   "Lift the folded towel onto the pile"
+  ],
+  [
+   250,
+   "Lift the folded towel onto the pile"
+  ],
+  [
+   300,
+   "Fold the strip widthwise in half, short "
+  ],
+  [
+   350,
+   "Fold the towel lengthwise in half, long "
+  ],
+  [
+   400,
+   "Fold the strip widthwise in half, short "
+  ],
+  [
+   450,
+   "Fold the towel lengthwise in half, long "
+  ],
+  [
+   500,
+   "Fold the strip widthwise in half, short "
+  ],
+  [
+   550,
+   "Fold the towel lengthwise in half, long "
+  ],
+  [
+   600,
+   "Fold the towel lengthwise in half, long "
+  ],
+  [
+   650,
+   "Fold the towel lengthwise in half, long "
+  ],
+  [
+   700,
+   "Fold the towel lengthwise in half, long "
+  ],
+  [
+   750,
+   "Fold the towel lengthwise in half, long "
+  ],
+  [
+   800,
+   "Straighten the towel flat, cross hems at"
+  ],
+  [
+   850,
+   "Straighten the towel flat, cross hems at"
+  ],
+  [
+   900,
+   "Straighten the towel flat, cross hems at"
+  ],
+  [
+   950,
+   "Straighten the towel flat, cross hems at"
+  ],
+  [
+   1000,
+   "Straighten the towel flat, cross hems at"
+  ],
+  [
+   1050,
+   "Fold the towel lengthwise in half, long "
+  ],
+  [
+   1100,
+   "Fold the towel lengthwise in half, long "
+  ],
+  [
+   1150,
+   "Fold the towel lengthwise in half, long "
+  ],
+  [
+   1200,
+   "Fold the strip widthwise in half, short "
+  ],
+  [
+   1250,
+   "Fold the strip widthwise in half, short "
+  ],
+  [
+   1300,
+   "Fold the strip widthwise in half, short "
+  ],
+  [
+   1350,
+   "Fold the strip widthwise in half, short "
+  ],
+  [
+   1400,
+   "Fold the strip widthwise in half, short "
+  ],
+  [
+   1450,
+   "Fold the strip widthwise in half, short "
+  ],
+  [
+   1500,
+   "Fold the strip widthwise in half, short "
+  ],
+  [
+   1550,
+   "Fold the strip widthwise in half, short "
+  ],
+  [
+   1600,
+   "Fold the towel lengthwise in half, long "
+  ],
+  [
+   1650,
+   "Lift the folded towel onto the pile"
+  ],
+  [
+   1700,
+   "Straighten the towel flat, cross hems at"
+  ],
+  [
+   1750,
+   "Lift the folded towel onto the pile"
+  ],
+  [
+   1800,
+   "Fold the towel lengthwise in half, long "
+  ],
+  [
+   1850,
+   "Fold the strip widthwise in half, short "
+  ],
+  [
+   1900,
+   "Pull the folded towel aside to clear spa"
+  ],
+  [
+   1950,
+   "Fold the towel lengthwise in half, long "
+  ],
+  [
+   2000,
+   "Pull the folded towel aside to clear spa"
+  ],
+  [
+   2050,
+   "Pull the folded towel aside to clear spa"
+  ],
+  [
+   2100,
+   "Fold the towel lengthwise in half, long "
+  ],
+  [
+   2150,
+   "Fold the strip widthwise in half, short "
+  ],
+  [
+   2200,
+   "Fold the strip widthwise in half, short "
+  ],
+  [
+   2250,
+   "Lift the folded towel onto the pile"
+  ],
+  [
+   2300,
+   "Drag the folded towel or pile to the bac"
+  ],
+  [
+   2350,
+   "Drag the folded towel or pile to the bac"
+  ],
+  [
+   2400,
+   "Confirm the end state, return both arms "
+  ]
+ ],
+ "candidates": {
+  "0": [],
+  "18": [
+   "release"
+  ],
+  "50": [
+   "grid"
+  ],
+  "53": [
+   "release_miss"
+  ],
+  "100": [
+   "grid"
+  ],
+  "121": [
+   "release"
+  ],
+  "150": [
+   "grid"
+  ],
+  "152": [
+   "motion"
+  ],
+  "160": [
+   "release"
+  ],
+  "200": [
+   "grid"
+  ],
+  "227": [
+   "release"
+  ],
+  "247": [
+   "motion"
+  ],
+  "250": [
+   "grid"
+  ],
+  "283": [
+   "release"
+  ],
+  "300": [
+   "grid"
+  ],
+  "316": [
+   "motion"
+  ],
+  "350": [
+   "grid"
+  ],
+  "375": [
+   "motion"
+  ],
+  "378": [
+   "motion"
+  ],
+  "400": [
+   "grid"
+  ],
+  "450": [
+   "grid"
+  ],
+  "500": [
+   "grid"
+  ],
+  "504": [
+   "release"
+  ],
+  "539": [
+   "motion"
+  ],
+  "550": [
+   "grid"
+  ],
+  "560": [
+   "motion"
+  ],
+  "598": [
+   "motion"
+  ],
+  "600": [
+   "grid"
+  ],
+  "648": [
+   "motion"
+  ],
+  "650": [
+   "grid"
+  ],
+  "653": [
+   "release_miss"
+  ],
+  "679": [
+   "motion"
+  ],
+  "700": [
+   "grid"
+  ],
+  "703": [
+   "release"
+  ],
+  "750": [
+   "grid"
+  ],
+  "767": [
+   "release_miss"
+  ],
+  "777": [
+   "motion"
+  ],
+  "796": [
+   "release"
+  ],
+  "800": [
+   "grid"
+  ],
+  "818": [
+   "release"
+  ],
+  "836": [
+   "release_miss"
+  ],
+  "850": [
+   "grid"
+  ],
+  "900": [
+   "grid"
+  ],
+  "904": [
+   "motion"
+  ],
+  "931": [
+   "release"
+  ],
+  "950": [
+   "grid",
+   "motion",
+   "release"
+  ],
+  "1000": [
+   "grid"
+  ],
+  "1037": [
+   "motion"
+  ],
+  "1045": [
+   "motion"
+  ],
+  "1050": [
+   "grid"
+  ],
+  "1054": [
+   "release"
+  ],
+  "1087": [
+   "motion"
+  ],
+  "1097": [
+   "motion"
+  ],
+  "1100": [
+   "grid"
+  ],
+  "1145": [
+   "motion"
+  ],
+  "1150": [
+   "grid"
+  ],
+  "1160": [
+   "motion"
+  ],
+  "1200": [
+   "grid"
+  ],
+  "1228": [
+   "motion"
+  ],
+  "1236": [
+   "motion"
+  ],
+  "1250": [
+   "grid"
+  ],
+  "1271": [
+   "motion"
+  ],
+  "1300": [
+   "grid"
+  ],
+  "1307": [
+   "motion"
+  ],
+  "1342": [
+   "motion"
+  ],
+  "1346": [
+   "motion"
+  ],
+  "1350": [
+   "grid"
+  ],
+  "1398": [
+   "motion"
+  ],
+  "1400": [
+   "grid"
+  ],
+  "1403": [
+   "motion"
+  ],
+  "1450": [
+   "grid"
+  ],
+  "1457": [
+   "motion"
+  ],
+  "1477": [
+   "release"
+  ],
+  "1500": [
+   "grid"
+  ],
+  "1507": [
+   "release"
+  ],
+  "1550": [
+   "grid"
+  ],
+  "1593": [
+   "motion"
+  ],
+  "1600": [
+   "grid"
+  ],
+  "1607": [
+   "motion"
+  ],
+  "1644": [
+   "release"
+  ],
+  "1650": [
+   "grid"
+  ],
+  "1673": [
+   "motion"
+  ],
+  "1700": [
+   "grid"
+  ],
+  "1715": [
+   "release"
+  ],
+  "1750": [
+   "grid",
+   "release"
+  ],
+  "1757": [
+   "motion"
+  ],
+  "1769": [
+   "motion"
+  ],
+  "1800": [
+   "grid"
+  ],
+  "1828": [
+   "motion"
+  ],
+  "1850": [
+   "grid"
+  ],
+  "1900": [
+   "grid"
+  ],
+  "1901": [
+   "release"
+  ],
+  "1908": [
+   "motion"
+  ],
+  "1950": [
+   "grid"
+  ],
+  "2000": [
+   "grid"
+  ],
+  "2050": [
+   "grid"
+  ],
+  "2092": [
+   "motion"
+  ],
+  "2100": [
+   "grid"
+  ],
+  "2101": [
+   "release"
+  ],
+  "2108": [
+   "motion"
+  ],
+  "2150": [
+   "grid"
+  ],
+  "2200": [
+   "grid"
+  ],
+  "2225": [
+   "motion"
+  ],
+  "2227": [
+   "release"
+  ],
+  "2235": [
+   "motion"
+  ],
+  "2250": [
+   "grid"
+  ],
+  "2291": [
+   "motion"
+  ],
+  "2300": [
+   "grid"
+  ],
+  "2350": [
+   "grid"
+  ],
+  "2380": [
+   "motion"
+  ],
+  "2400": [
+   "grid"
+  ],
+  "2450": [
+   "grid"
+  ],
+  "2483": [
+   "end"
+  ]
+ },
+ "segments": [
+  {
+   "row": "Move one towel from the left pile to the working area",
+   "f0": 0,
+   "f1": 504,
+   "end_kind": [
+    "release"
+   ],
+   "vlm_score": 31.9,
+   "status": "suboptimal",
+   "retry": [
+    "g0 released at 121, re-grasped at 382 nearby",
+    "g0 released at 160, re-grasped at 382 nearby",
+    "g1 released at 227, re-grasped at 503 nearby"
+   ]
+  },
+  {
+   "row": "Straighten the towel flat, cross hems at the top and bottom",
+   "f0": 504,
+   "f1": 1037,
+   "end_kind": [
+    "motion"
+   ],
+   "vlm_score": 35.72,
+   "status": "suboptimal",
+   "retry": [
+    "g0 593-656: missed grasp (p(lifted)=0.10)"
+   ]
+  },
+  {
+   "row": "Fold the towel lengthwise in half, long edge to long edge",
+   "f0": 1037,
+   "f1": 1160,
+   "end_kind": [
+    "motion"
+   ],
+   "vlm_score": 8.18,
+   "status": "ok",
+   "retry": []
+  },
+  {
+   "row": "Fold the strip widthwise in half, short edge to short edge",
+   "f0": 1160,
+   "f1": 1593,
+   "end_kind": [
+    "motion"
+   ],
+   "vlm_score": 30.22,
+   "status": "ok",
+   "retry": []
+  },
+  {
+   "row": "Pull the folded towel aside to clear space",
+   "f0": 1593,
+   "f1": 2101,
+   "end_kind": [
+    "release"
+   ],
+   "vlm_score": 47.54,
+   "status": "ok",
+   "retry": []
+  },
+  {
+   "row": "Lift the folded towel onto the pile",
+   "f0": 2101,
+   "f1": 2291,
+   "end_kind": [
+    "motion"
+   ],
+   "vlm_score": 11.86,
+   "status": "ok",
+   "retry": []
+  },
+  {
+   "row": "Drag the folded towel or pile to the back-right pile location",
+   "f0": 2291,
+   "f1": 2380,
+   "end_kind": [
+    "motion"
+   ],
+   "vlm_score": 17.56,
+   "status": "ok",
+   "retry": []
+  },
+  {
+   "row": "Confirm the end state, return both arms home, and end the episode",
+   "f0": 2380,
+   "f1": 2483,
+   "end_kind": [
+    "end"
+   ],
+   "vlm_score": 11.08,
+   "status": "ok",
+   "retry": []
+  }
+ ],
+ "skipped_slots": [
+  {
+   "slot": 5,
+   "row": "Drag the pile next to the folded towel",
+   "skip_cost": 0.013
+  }
+ ],
+ "episodes": [
+  {
+   "gripper": 1,
+   "c0": 2,
+   "c1": 17,
+   "onset": 18,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 50.23196193659969,
+   "ap_med": 0.2867720632379428,
+   "failed": false,
+   "depart": null,
+   "uncertain": false,
+   "t_onset": 0.36
+  },
+  {
+   "gripper": 0,
+   "c0": 42,
+   "c1": 50,
+   "onset": 53,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 6.800735254367722,
+   "ap_med": 0.25645,
+   "failed": true,
+   "depart": null,
+   "uncertain": false,
+   "t_onset": 1.06
+  },
+  {
+   "gripper": 0,
+   "c0": 91,
+   "c1": 126,
+   "onset": 121,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 227.69332445199177,
+   "ap_med": 0.010202040408081592,
+   "failed": false,
+   "depart": null,
+   "uncertain": false,
+   "t_onset": 2.42
+  },
+  {
+   "gripper": 0,
+   "c0": 131,
+   "c1": 158,
+   "onset": 160,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 102.27658578579948,
+   "ap_med": 0.08203321590337198,
+   "failed": false,
+   "depart": null,
+   "uncertain": false,
+   "t_onset": 3.2
+  },
+  {
+   "gripper": 1,
+   "c0": 174,
+   "c1": 223,
+   "onset": 227,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 252.80921660414202,
+   "ap_med": 0.040204020402040186,
+   "failed": false,
+   "depart": null,
+   "uncertain": false,
+   "t_onset": 4.54
+  },
+  {
+   "gripper": 1,
+   "c0": 231,
+   "c1": 276,
+   "onset": 283,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 41.16430492550555,
+   "ap_med": 0.28270289261037596,
+   "failed": false,
+   "depart": null,
+   "uncertain": true,
+   "t_onset": 5.66
+  },
+  {
+   "gripper": 0,
+   "c0": 382,
+   "c1": 508,
+   "onset": 504,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 163.08586695357755,
+   "ap_med": 0.027800000000000047,
+   "failed": false,
+   "depart": null,
+   "uncertain": false,
+   "t_onset": 10.08
+  },
+  {
+   "gripper": 1,
+   "c0": 503,
+   "c1": 700,
+   "onset": 703,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 543.1652603029763,
+   "ap_med": 0.04832416208104051,
+   "failed": false,
+   "depart": null,
+   "uncertain": false,
+   "t_onset": 14.06
+  },
+  {
+   "gripper": 0,
+   "c0": 593,
+   "c1": 656,
+   "onset": 653,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 22.901964981197573,
+   "ap_med": 0.17681012658227846,
+   "failed": true,
+   "depart": null,
+   "uncertain": false,
+   "t_onset": 13.06
+  },
+  {
+   "gripper": 0,
+   "c0": 752,
+   "c1": 796,
+   "onset": 796,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 67.8122407829147,
+   "ap_med": 0.06659999999999999,
+   "failed": false,
+   "depart": null,
+   "uncertain": false,
+   "t_onset": 15.92
+  },
+  {
+   "gripper": 1,
+   "c0": 755,
+   "c1": 763,
+   "onset": 767,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 10.04987562112089,
+   "ap_med": 0.2875787578757876,
+   "failed": true,
+   "depart": null,
+   "uncertain": false,
+   "t_onset": 15.34
+  },
+  {
+   "gripper": 1,
+   "c0": 784,
+   "c1": 825,
+   "onset": 818,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 232.038789860661,
+   "ap_med": 0.09109999999999996,
+   "failed": false,
+   "depart": null,
+   "uncertain": false,
+   "t_onset": 16.36
+  },
+  {
+   "gripper": 0,
+   "c0": 817,
+   "c1": 841,
+   "onset": 836,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 36.93913913452776,
+   "ap_med": 0.21727327568871901,
+   "failed": true,
+   "depart": null,
+   "uncertain": false,
+   "t_onset": 16.72
+  },
+  {
+   "gripper": 0,
+   "c0": 885,
+   "c1": 944,
+   "onset": 950,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 75.73803535872844,
+   "ap_med": 0.15267481466639954,
+   "failed": false,
+   "depart": null,
+   "uncertain": false,
+   "t_onset": 19.0
+  },
+  {
+   "gripper": 1,
+   "c0": 894,
+   "c1": 944,
+   "onset": 931,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 101.15582039606025,
+   "ap_med": 0.17874999999999996,
+   "failed": false,
+   "depart": null,
+   "uncertain": false,
+   "t_onset": 18.62
+  },
+  {
+   "gripper": 0,
+   "c0": 985,
+   "c1": 1053,
+   "onset": 1054,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 36.908671067921155,
+   "ap_med": 0.0022999999999999687,
+   "failed": false,
+   "depart": null,
+   "uncertain": false,
+   "t_onset": 21.08
+  },
+  {
+   "gripper": 1,
+   "c0": 1414,
+   "c1": 1471,
+   "onset": 1477,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 106.50469473220417,
+   "ap_med": 0.1505752876438219,
+   "failed": false,
+   "depart": null,
+   "uncertain": false,
+   "t_onset": 29.54
+  },
+  {
+   "gripper": 0,
+   "c0": 1458,
+   "c1": 1515,
+   "onset": 1507,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 1.118033988749895,
+   "ap_med": 0.04442221110555278,
+   "failed": false,
+   "depart": null,
+   "uncertain": false,
+   "t_onset": 30.14
+  },
+  {
+   "gripper": 1,
+   "c0": 1629,
+   "c1": 1641,
+   "onset": 1644,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 16.446884203398525,
+   "ap_med": 0.16831380539989815,
+   "failed": false,
+   "depart": null,
+   "uncertain": false,
+   "t_onset": 32.88
+  },
+  {
+   "gripper": 0,
+   "c0": 1688,
+   "c1": 1716,
+   "onset": 1715,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 122.2303153886138,
+   "ap_med": 0.006350635063506305,
+   "failed": false,
+   "depart": null,
+   "uncertain": false,
+   "t_onset": 34.3
+  },
+  {
+   "gripper": 0,
+   "c0": 1737,
+   "c1": 1745,
+   "onset": 1750,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 5.024937810560445,
+   "ap_med": 0.11719410486521686,
+   "failed": false,
+   "depart": null,
+   "uncertain": false,
+   "t_onset": 35.0
+  },
+  {
+   "gripper": 1,
+   "c0": 1834,
+   "c1": 1915,
+   "onset": 1901,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 143.16162195225368,
+   "ap_med": 0.276251417817988,
+   "failed": false,
+   "depart": null,
+   "uncertain": true,
+   "t_onset": 38.02
+  },
+  {
+   "gripper": 0,
+   "c0": 2056,
+   "c1": 2096,
+   "onset": 2101,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 22.20923231451281,
+   "ap_med": 0.08580415041504147,
+   "failed": false,
+   "depart": null,
+   "uncertain": false,
+   "t_onset": 42.02
+  },
+  {
+   "gripper": 0,
+   "c0": 2170,
+   "c1": 2220,
+   "onset": 2227,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 36.05551275463989,
+   "ap_med": 0.3428716085198845,
+   "failed": false,
+   "depart": null,
+   "uncertain": false,
+   "t_onset": 44.54
+  },
+  {
+   "gripper": 1,
+   "c0": 2170,
+   "c1": 2484,
+   "onset": null,
+   "obj": null,
+   "tid": null,
+   "detail": null,
+   "obj_disp": NaN,
+   "grip_disp": 325.6723813896413,
+   "ap_med": 0.006079027355623157,
+   "failed": false,
+   "depart": null,
+   "uncertain": false,
+   "t_onset": null
+  }
+ ],
+ "issues": [
+  "[4] seq 3 ends at 23.2s with no gripper opening within 0.5 s",
+  "[4] seq 4 ends at 31.86s with no gripper opening within 0.5 s",
+  "[4] seq 6 ends at 45.82s with no gripper opening within 0.5 s",
+  "[4] seq 7 ends at 47.6s with no gripper opening within 0.5 s"
+ ]
+}

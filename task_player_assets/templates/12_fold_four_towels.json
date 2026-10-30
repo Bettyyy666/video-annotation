@@ -1,0 +1,202 @@
+{
+  "episode": {
+    "episode_id": "12_fold_four_towels",
+    "robot": null,
+    "outcome": null
+  },
+  "steps": [
+    {
+      "step_n": 1,
+      "step_name": "Move a towel to the working area",
+      "t_start": 0.0,
+      "t_end": 0.0,
+      "f_start": 0,
+      "f_end": 0
+    },
+    {
+      "step_n": 2,
+      "step_name": "Straighten the towel",
+      "t_start": 0.0,
+      "t_end": 0.0,
+      "f_start": 0,
+      "f_end": 0
+    },
+    {
+      "step_n": 3,
+      "step_name": "First fold (lengthwise in half)",
+      "t_start": 0.0,
+      "t_end": 0.0,
+      "f_start": 0,
+      "f_end": 0
+    },
+    {
+      "step_n": 4,
+      "step_name": "Second fold (widthwise in half)",
+      "t_start": 0.0,
+      "t_end": 0.0,
+      "f_start": 0,
+      "f_end": 0
+    },
+    {
+      "step_n": 5,
+      "step_name": "Stack the folded towel onto the pile",
+      "t_start": 0.0,
+      "t_end": 0.0,
+      "f_start": 0,
+      "f_end": 0
+    },
+    {
+      "step_n": 6,
+      "step_name": "Move the folded towel or stack to the right side of the table",
+      "t_start": 0.0,
+      "t_end": 0.0,
+      "f_start": 0,
+      "f_end": 0
+    },
+    {
+      "step_n": 7,
+      "step_name": "Return to home and end the episode",
+      "t_start": 0.0,
+      "t_end": 0.0,
+      "f_start": 0,
+      "f_end": 0
+    }
+  ],
+  "subtasks": [
+    {
+      "seq": 1,
+      "step_n": 1,
+      "name": "Move one towel from the left pile to the working area",
+      "occurrence": 1,
+      "object": "towel",
+      "object_detail": null,
+      "t_start": 0.0,
+      "t_end": 3.5,
+      "f_start": 0,
+      "f_end": 175,
+      "status": "ok",
+      "recovery_t": null,
+      "note": null
+    },
+    {
+      "seq": 2,
+      "step_n": 2,
+      "name": "Straighten the towel flat, cross hems at the top and bottom",
+      "occurrence": 1,
+      "object": "towel",
+      "object_detail": null,
+      "t_start": 3.5,
+      "t_end": 17.0,
+      "f_start": 175,
+      "f_end": 850,
+      "status": "ok",
+      "recovery_t": null,
+      "note": null
+    },
+    {
+      "seq": 3,
+      "step_n": 3,
+      "name": "Fold the towel lengthwise in half, long edge to long edge",
+      "occurrence": 1,
+      "object": "towel",
+      "object_detail": null,
+      "t_start": 17.0,
+      "t_end": 27.0,
+      "f_start": 850,
+      "f_end": 1350,
+      "status": "suboptimal",
+      "recovery_t": 20.0,
+      "note": null
+    },
+    {
+      "seq": 4,
+      "step_n": 4,
+      "name": "Fold the strip widthwise in half, short edge to short edge",
+      "occurrence": 1,
+      "object": "towel",
+      "object_detail": null,
+      "t_start": 27.0,
+      "t_end": 33.0,
+      "f_start": 1350,
+      "f_end": 1650,
+      "status": "suboptimal",
+      "recovery_t": 32.0,
+      "note": null
+    },
+    {
+      "seq": 5,
+      "step_n": 5,
+      "name": "Pull the folded towel aside to clear space",
+      "occurrence": 1,
+      "object": "towel",
+      "object_detail": null,
+      "t_start": 33.0,
+      "t_end": 35.0,
+      "f_start": 1650,
+      "f_end": 1750,
+      "status": "ok",
+      "recovery_t": null,
+      "note": "count: 0–1, only if a pile is already at the back-right"
+    },
+    {
+      "seq": 6,
+      "step_n": 5,
+      "name": "Drag the pile next to the folded towel",
+      "occurrence": 1,
+      "object": "pile",
+      "object_detail": null,
+      "t_start": 35.0,
+      "t_end": 38.5,
+      "f_start": 1750,
+      "f_end": 1925,
+      "status": "ok",
+      "recovery_t": null,
+      "note": "count: 0–1, only if a pile is already at the back-right"
+    },
+    {
+      "seq": 7,
+      "step_n": 5,
+      "name": "Lift the folded towel onto the pile",
+      "occurrence": 1,
+      "object": "towel",
+      "object_detail": null,
+      "t_start": 38.5,
+      "t_end": 45.0,
+      "f_start": 1925,
+      "f_end": 2250,
+      "status": "ok",
+      "recovery_t": null,
+      "note": "count: 0–1, only if a pile is already at the back-right"
+    },
+    {
+      "seq": 8,
+      "step_n": 6,
+      "name": "Drag the folded towel or pile to the back-right pile location",
+      "occurrence": 1,
+      "object": "pile",
+      "object_detail": null,
+      "t_start": 45.0,
+      "t_end": 47.5,
+      "f_start": 2250,
+      "f_end": 2375,
+      "status": "ok",
+      "recovery_t": null,
+      "note": null
+    },
+    {
+      "seq": 9,
+      "step_n": 7,
+      "name": "Confirm the end state, return both arms home, and end the episode",
+      "occurrence": 1,
+      "object": "–",
+      "object_detail": null,
+      "t_start": 47.5,
+      "t_end": 49.5,
+      "f_start": 2375,
+      "f_end": 2475,
+      "status": "ok",
+      "recovery_t": null,
+      "note": null
+    }
+  ]
+}

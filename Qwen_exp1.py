@@ -22,7 +22,7 @@ DATA = "/users/rzhou52/data/users/rzhou52/video-annotation/data"
 MODEL = "/users/rzhou52/data/users/rzhou52/Qwen3-VL-8B-Instruct"
 
 PROMPT = """You are looking at a robot manipulation video. A bimanual teleoperated robot is filmed from above (top-down view of a table).
-You will see {n} frames sampled at about {fps} fps from the window t = {t0:.3f}s to {t1:.3f}s of the video.
+You will see {n} frames sampled every {interval}s from the window t = {t0:.3f}s to {t1:.3f}s of the video.
 Each image is preceded by its original frame number and timestamp. This window may start or end in the middle of an action.
 
 Below is the COMPLETE task sheet for this task. It is only a REFERENCE for what may happen.
@@ -85,22 +85,32 @@ def init_results(task, video):
             "steps": steps, "subtasks": subtasks}
 
 
-def sample_frames(video, sample_fps, width):
-    """Read the video sequentially; keep every k-th frame with its original frame number and time."""
+def sample_frames(video, interval, width):
+    """Read the video sequentially; keep every step-th frame (step = interval * fps, an integer),
+    with its original frame number and time. The last decoded frame (end of video) is always kept."""
     cap = cv2.VideoCapture(str(video))
     fps = cap.get(cv2.CAP_PROP_FPS)
-    step = round(fps / sample_fps)
-    samples, f = [], 0
+    step = round(interval * fps)
+    if abs(step - interval * fps) > 1e-6:
+        print(f"WARNING: interval {interval}s = {interval * fps} frames at {fps} fps; using step {step}")
+
+    def to_sample(bgr, f):
+        img = Image.fromarray(cv2.cvtColor(bgr, cv2.COLOR_BGR2RGB))
+        img = img.resize((width, round(img.height * width / img.width)))
+        return {"frame": f, "t": round(f / fps, 3), "image": img}
+
+    samples, f, last = [], 0, None
     while True:
         ok, bgr = cap.read()
         if not ok:
             break
         if f % step == 0:
-            img = Image.fromarray(cv2.cvtColor(bgr, cv2.COLOR_BGR2RGB))
-            img = img.resize((width, round(img.height * width / img.width)))
-            samples.append({"frame": f, "t": round(f / fps, 3), "image": img})
+            samples.append(to_sample(bgr, f))
+        last = bgr
         f += 1
     cap.release()
+    if last is not None and samples[-1]["frame"] != f - 1:
+        samples.append(to_sample(last, f - 1))
     return samples, fps, f  # f = number of decoded frames
 
 
@@ -116,8 +126,8 @@ def make_windows(samples, window_sec, stride_sec):
     return windows
 
 
-def build_messages(window, sheet_text, sample_fps):
-    text = PROMPT.format(n=len(window), fps=sample_fps, t0=window[0]["t"], t1=window[-1]["t"], sheet=sheet_text)
+def build_messages(window, sheet_text, interval):
+    text = PROMPT.format(n=len(window), interval=interval, t0=window[0]["t"], t1=window[-1]["t"], sheet=sheet_text)
     content = [{"type": "text", "text": text}]
     for s in window:
         content.append({"type": "text", "text": f"\nFrame {s['frame']} (t={s['t']:.3f}s):"})
@@ -127,11 +137,11 @@ def build_messages(window, sheet_text, sample_fps):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--video", default=f"{DATA}/12_fold_four_towels.mp4")
+    ap.add_argument("--video", default=f"{DATA}/26_sort_cutlery_drawer_insert.mp4")
     ap.add_argument("--task-sheet", default=f"{DATA}/task_sheets.json")
     ap.add_argument("--model", default=MODEL)
     ap.add_argument("--out", default="runs/exp1")
-    ap.add_argument("--sample-fps", type=float, default=2.0)
+    ap.add_argument("--interval", type=float, default=0.2, help="seconds between sampled frames")
     ap.add_argument("--window-sec", type=float, default=8.0)
     ap.add_argument("--stride-sec", type=float, default=6.0)
     ap.add_argument("--image-width", type=int, default=640)
@@ -145,18 +155,19 @@ def main():
 
     task = load_task(args.task_sheet, args.video)
     sheet_text = json.dumps(task, indent=1, ensure_ascii=False)
-    samples, fps, n_frames = sample_frames(args.video, args.sample_fps, args.image_width)
+    samples, fps, n_frames = sample_frames(args.video, args.interval, args.image_width)
     windows = make_windows(samples, args.window_sec, args.stride_sec)
     print(f"fps={fps} decoded_frames={n_frames} samples={len(samples)} windows={len(windows)}")
     
     # Save sampled frames so the outputs can be checked against the video.
     for s in samples:
         s["image"].save(frames_dir / f"f{s['frame']:06d}_t{s['t']:07.3f}.jpg", quality=90)
-    return 
+    
     
     # initialize results json
     results = init_results(task, args.video)
     json.dump(results, open(out / f"{Path(args.video).stem}.json", "w"), indent=1, ensure_ascii=False)
+    return 
 
     if not args.dry_run:
         import torch
@@ -171,7 +182,7 @@ def main():
             "model": args.model, "args": vars(args), "windows": []}
 
     for i, w in enumerate(windows):
-        messages = build_messages(w, sheet_text, args.sample_fps)
+        messages = build_messages(w, sheet_text, args.interval)
         prompt = (messages[0]["content"][0]["text"] if args.dry_run else
                   processor.apply_chat_template(messages, tokenize=False, add_generation_prompt=True))
         (out / f"w{i:02d}_prompt.txt").write_text(prompt)

@@ -1,0 +1,10 @@
+seq,name,occurrence,gt_f_end,pred_f_end,err_matched,err_nearest,gt_status,pred_status,gt_recovery_t,recovery_err_s
+1,Move one towel from the left pile to the working area,1,146,504,358,358,ok,suboptimal,,
+2,"Straighten the towel flat, cross hems at the top and bottom",1,943,1037,94,94,suboptimal,suboptimal,16.62,-1.58
+3,"Fold the towel lengthwise in half, long edge to long edge",1,1343,1160,-183,-183,ok,ok,,
+4,"Fold the strip widthwise in half, short edge to short edge",1,1655,1593,-62,-62,suboptimal,ok,31.98,
+5,Pull the folded towel aside to clear space,1,1737,2101,364,-144,ok,ok,,
+6,Drag the pile next to the folded towel,1,1908,,,193,ok,,,
+7,Lift the folded towel onto the pile,1,2230,2291,61,61,ok,ok,,
+8,Drag the folded towel or pile to the back-right pile location,1,2366,2380,14,14,ok,ok,,
+9,"Confirm the end state, return both arms home, and end the episode",1,2483,2483,,,ok,ok,,

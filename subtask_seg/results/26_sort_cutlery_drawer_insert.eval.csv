@@ -1,0 +1,11 @@
+seq,name,occurrence,gt_f_end,pred_f_end,err_matched,err_nearest,gt_status,pred_status,gt_recovery_t,recovery_err_s
+1,Place one dinner spoon in the insert,1,779,197,-582,-582,ok,ok,,
+2,Place one fork in the insert,1,2385,2083,-302,-302,ok,ok,,
+3,Place one fork in the insert,2,2859,3321,462,462,ok,suboptimal,,
+4,Place one knife in the insert,1,3710,3357,-353,73,ok,ok,,
+5,Place one knife in the insert,2,4610,3783,-827,61,ok,ok,,
+6,Place one teaspoon in the insert,1,5023,4671,-352,-180,ok,ok,,
+7,Place one teaspoon in the insert,2,5913,4843,-1070,-1070,ok,ok,,
+8,Place the wooden serving utensil in the insert,1,7182,8003,821,821,ok,suboptimal,,
+9,Slide the loaded insert to the right-side finished zone,1,7762,8300,538,241,ok,ok,,
+10,Verify the finished task and hold the final arm positions,1,8885,8885,,,ok,ok,,

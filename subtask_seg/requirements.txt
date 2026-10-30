@@ -1,0 +1,8 @@
+# same environment as ../gripper (conda env "annotation")
+torch
+transformers>=4.57   # Qwen3-VL
+accelerate
+Pillow
+opencv-python-headless
+numpy
+# optional: ultralytics (YOLO-World, pipeline/perception.detect_objects) - not used by annotate.py
